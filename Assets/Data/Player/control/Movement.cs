@@ -1,17 +1,18 @@
-﻿using System.Collections;
+﻿using Player.Model;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement: Command
 {
-    private Player player;
+    private Atributes player;
     private Model model;
     private float xAxis;
     private float zAxis;
 
     public Movement(GameObject playerObj, Model model)
     {
-        player = playerObj.GetComponent<Player>();
+        player = playerObj.GetComponent<Atributes>();
         this.model = model;
     }
     public void Execute()

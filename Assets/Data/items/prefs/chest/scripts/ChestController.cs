@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-
 public class ChestController : DetectorController
 {
     private Model player;
@@ -23,7 +22,7 @@ public class ChestController : DetectorController
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-
+       
         if (other.CompareTag("player"))
         {
             player = other.GetComponent<Model>();
@@ -40,7 +39,6 @@ public class ChestController : DetectorController
             }
             gui.EnableInfo();
         }
-        
     }
     protected override void OnTriggerExit(Collider other)
     {

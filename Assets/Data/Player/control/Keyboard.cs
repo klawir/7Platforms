@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Player.Weapon.Model;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class Keyboard : MonoBehaviour
 {
     public GameObject playerTransf;
     public Model playersModel;
+    public WeaponSwitcher weaponSwitcher;
     
     private Command movement;
     private Command jump;
@@ -29,6 +31,12 @@ public class Keyboard : MonoBehaviour
 
             doubleJump.Reset();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            weaponSwitcher.SwitchToFastShootingWeapon();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            weaponSwitcher.SwitchToRaycastWeapon();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            weaponSwitcher.SwitchToBazooke();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jump.Execute();

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Player.Model;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class Model : MonoBehaviour
     public Transform hand;
     public GameObject key;
     public Rigidbody rigidbody;
-    public Player player;
+    public Atributes player;
 
     public float gravity;
     private bool isGrounded;
