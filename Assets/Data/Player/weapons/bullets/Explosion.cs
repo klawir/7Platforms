@@ -1,10 +1,16 @@
-﻿using System.Collections;
+﻿using Enemy;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : BulletDecorator
 {
-    public float dmg;
+    public int dmg;
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
 
     public Explosion(Bullet bullet) : base(bullet)
     {
@@ -12,6 +18,10 @@ public class Explosion : BulletDecorator
 
     protected override void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Explosion");
+        if (other.CompareTag("enemy"))
+        {
+            other.GetComponent<BaseCombat>().TakeDmg(dmg);
+            Destroy(transform.root.gameObject);
+        }
     }
 }

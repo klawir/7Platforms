@@ -10,6 +10,8 @@ namespace Player
         {
             public abstract class Weapon : MonoBehaviour, IWeapon
             {
+                public Transform rifleBarrel;
+
                 public abstract void Shoot();
             }
         }

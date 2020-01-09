@@ -13,8 +13,9 @@ public class Rocket : Bullet
     }
     protected override void OnTriggerEnter(Collider other)
     {
-        //if(other.CompareTag("enemy"))
-        explosion.SetActive(true);
-        Debug.Log("Rocket");
+        if (other.CompareTag("enemy"))
+        {
+            explosion.SetActive(true);
+        }
     }
 }

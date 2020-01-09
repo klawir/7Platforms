@@ -124,3 +124,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   momentum: {fileID: -702679420608873286}
   speed: 30
+  dmg: 2

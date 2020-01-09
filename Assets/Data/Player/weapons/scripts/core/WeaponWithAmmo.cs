@@ -11,7 +11,6 @@ namespace Player
             public abstract class WeaponWithAmmo : Weapon
             {
                 public Bullet bullet;
-                public Transform rifleBarrel;
                 protected GameObject tempObj;
 
                 public override void Shoot()

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &141577156053943473
 Transform:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   momentum: {fileID: 4055499772275128939}
   speed: 0
-  dmg: 3
+  dmg: 5
 --- !u!1 &3839213496587597681
 GameObject:
   m_ObjectHideFlags: 0

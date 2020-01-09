@@ -17,8 +17,10 @@ namespace Player
 
                 private void Start()
                 {
-                    weapons[(int)weaponsList.fastShootingWeapon].GetComponent<TypeOf.WeaponWithAmmo>().rifleBarrel = transform;
-                    weapons[(int)weaponsList.bazooke].GetComponent<TypeOf.WeaponWithAmmo>().rifleBarrel = transform;
+                    //foreach:
+                    weapons[(int)weaponsList.fastShootingWeapon].GetComponent<TypeOf.Weapon>().rifleBarrel = transform;
+                    weapons[(int)weaponsList.bazooke].GetComponent<TypeOf.Weapon>().rifleBarrel = transform;
+                    weapons[(int)weaponsList.raycastWeapon].GetComponent<TypeOf.Weapon>().rifleBarrel = transform;
                 }
 
                 public void SwitchToFastShootingWeapon()
