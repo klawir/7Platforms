@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Model : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Model : MonoBehaviour
     public GameObject key;
     public Rigidbody rigidbody;
     public Atributes player;
+    public Abilities abilities;
+    public Text doubleJump;
 
     public float gravity;
     private bool isGrounded;
@@ -64,6 +67,11 @@ public class Model : MonoBehaviour
     public void TakeKey()
     {
         Instantiate(key, hand);
+    }
+    public void TakePowerUp()
+    {
+        abilities.jump.Unlock();
+        doubleJump.color = Color.green;
     }
     public void KeyJumpWallFaded()
     {

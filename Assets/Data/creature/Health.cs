@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     {
         get { return current <= 0; }
     }
-    public void UpdateGUI()
+    public void UpdateGUI()//duplicate with score
     {
         text.text = "health: " + current.ToString();
     }

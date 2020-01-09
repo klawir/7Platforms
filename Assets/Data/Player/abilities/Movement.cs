@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement: Command
+public class Movement: Ability
 {
     private Atributes player;
     private Model model;
@@ -15,7 +15,7 @@ public class Movement: Command
         player = playerObj.GetComponent<Atributes>();
         this.model = model;
     }
-    public void Execute()
+    public override void Execute()
     {
         xAxis = Input.GetAxis("Horizontal") * player.speed * Time.deltaTime;
         zAxis = Input.GetAxis("Vertical") * player.speed * Time.deltaTime;

@@ -8,17 +8,8 @@ public class Keyboard : MonoBehaviour
     public GameObject playerTransf;
     public Model playersModel;
     public WeaponSwitcher weaponSwitcher;
-    
-    private Command movement;
-    private Command jump;
-    private Jump doubleJump;
+    public Abilities abilities;
 
-    private void Start()
-    {
-        movement = new Movement(playerTransf, playersModel);
-        jump = new Jump(playersModel.gameObject);
-        doubleJump = new Jump(playersModel.gameObject);
-    }
     void Update()
     {
         if (playersModel.IsGrounded)
@@ -27,9 +18,9 @@ public class Keyboard : MonoBehaviour
                 || Input.GetKey(KeyCode.A)
                 || Input.GetKey(KeyCode.S)
                 || Input.GetKey(KeyCode.D))
-                movement.Execute();
+                abilities.movement.Execute();
 
-            doubleJump.Reset();
+            //abilities.doubleJump.Reset();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
             weaponSwitcher.SwitchToFastShootingWeapon();
@@ -39,8 +30,10 @@ public class Keyboard : MonoBehaviour
             weaponSwitcher.SwitchToBazooke();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jump.Execute();
-            doubleJump.Execute();
+            abilities.jump.Execute();
+            //abilities.doubleJump.Execute();
         }
+        if (Input.GetMouseButton(0))
+            abilities.shooting.Execute();
     }
 }

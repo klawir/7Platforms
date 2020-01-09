@@ -4,26 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class Shooting : Ability
 {
-    public WeaponSwitcher weaponSwitcher;
+    private WeaponSwitcher weaponSwitcher;
     private Delay delay;
     public float speed;
 
-    private void Start()
+    public Shooting(WeaponSwitcher weaponSwitcher)
     {
+        this.weaponSwitcher = weaponSwitcher;
         weaponSwitcher.SwitchToFastShootingWeapon();
         delay = new Delay(speed);
     }
-    private void Update()
+
+    public override void Execute()
     {
-        if (Input.GetMouseButton(0))
+        if (delay.IsOver)
         {
-            if (delay.IsOver)
-            {
-                delay.Init(speed);
-                weaponSwitcher.CurrentChosenWeapon.Shoot();
-            }
+            delay.Init(speed);
+            weaponSwitcher.CurrentChosenWeapon.Shoot();
         }
     }
 }

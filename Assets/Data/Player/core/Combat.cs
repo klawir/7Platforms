@@ -6,6 +6,8 @@ namespace Player
 {
     public class Combat : BaseCombat
     {
+        public Score score;
+
         private void Start()
         {
             health.UpdateGUI();

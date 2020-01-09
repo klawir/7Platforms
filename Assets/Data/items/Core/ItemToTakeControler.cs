@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using Player;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeysController : DetectorController
+public abstract class ItemToTakeControler : DetectorController
 {
     public Items.ToTake.GUI gui;
+    public GameObject root;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -17,15 +19,16 @@ public class KeysController : DetectorController
         base.OnTriggerExit(other);
         gui.DisableInfo();
     }
-    private void Update()
+    protected virtual void Update()
     {
         if (playerInZone)
         {
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                Destroy(gameObject);
-                gui.DisableInfo();
-            }
+            if (Input.GetKeyDown(KeyCode.E))
+                Destroy(root);
         }
+    }
+    protected virtual void OnDestroy()
+    {
+        gui.DisableInfo();
     }
 }

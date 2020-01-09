@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jump : Command
+public class Jump : Ability
 {
     private Rigidbody rigidbody;
     private Model model;
@@ -16,17 +16,22 @@ public class Jump : Command
         model = modelObj.GetComponent<Model>();
         canDoubleAvailable = true;
     }
-    public void Reset()
+    public override void Execute()
     {
-        canDoubleAvailable = true;
-    }
-    public virtual void Execute()
-    {
-        if (model.IsGrounded || !model.IsGrounded && canDoubleAvailable)
+        if (model.IsGrounded)
         {
+            if (!canDoubleAvailable)
+                canDoubleAvailable = true;
             rigidbody.velocity = Vector3.up * velocity;
-            if(canDoubleAvailable)
-                canDoubleAvailable = false;
+        }
+        else
+        {
+            if (canDoubleAvailable && !blockade)
+            {
+                rigidbody.velocity = Vector3.up * velocity;
+                if (canDoubleAvailable)
+                    canDoubleAvailable = false;
+            }
         }
     }
 }

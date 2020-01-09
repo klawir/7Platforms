@@ -12,6 +12,7 @@ namespace Enemy
         public PlatformTerrain platformTerrain;
         private Delay delay;
         public float speed;
+        public Reward reward;
 
         private void Start()
         {
@@ -44,11 +45,15 @@ namespace Enemy
         }
         public void Hit()
         {
-            platformTerrain.DetectedPlayer.TakeDmg(dmg);
+            platformTerrain.DetectedPlayer.GetComponent<BaseCombat>().TakeDmg(dmg);
         }
         protected override void Die()
         {
             base.Die();
+        }
+        private void OnDestroy()
+        {
+            platformTerrain.DetectedPlayer.GetComponent<Player.Combat>().score.Add(reward);
         }
     }
 }

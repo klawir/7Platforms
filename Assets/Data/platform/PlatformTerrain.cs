@@ -6,14 +6,14 @@ using UnityEngine;
 public class PlatformTerrain : MonoBehaviour
 {
     private bool playerDetected;
-    private BaseCombat detectedPlayer;
+    private GameObject detectedPlayer;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer==8)
         {
             playerDetected = true;
-            detectedPlayer = collision.gameObject.GetComponent<BaseCombat>();
+            detectedPlayer = collision.gameObject;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -33,7 +33,7 @@ public class PlatformTerrain : MonoBehaviour
     {
         get { return detectedPlayer.transform.position; }
     }
-    public BaseCombat DetectedPlayer
+    public GameObject DetectedPlayer
     {
         get { return detectedPlayer; }
     }
