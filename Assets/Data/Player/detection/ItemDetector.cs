@@ -10,7 +10,7 @@ public class ItemDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("itemToTake"))
-            detectedItem =true;
+            detectedItem = true;
     }
     private void OnTriggerExit(Collider other)
     {
@@ -19,8 +19,6 @@ public class ItemDetector : MonoBehaviour
     }
     private void Update()
     {
-        if(detectedItem)
-            if (Input.GetKeyDown(KeyCode.E))
-                model.TakeKey();
+
     }
 }

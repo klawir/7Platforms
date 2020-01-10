@@ -5,6 +5,9 @@ public class ChestController : DetectorController
 {
     private Model player;
     public Items.ToUse.GUI gui;
+    public GameObject up;
+    public Collider col;
+    public GameObject loot;
 
     enum DoorState
     {
@@ -17,6 +20,22 @@ public class ChestController : DetectorController
     void Start()
     {
         SetStateToClosed();
+    }
+    void Update()
+    {
+        if (playerInZone)
+        {
+            if (Input.GetKeyDown(KeyCode.E) && player.HasKeys)
+            {
+                if (doorState == DoorState.Closed)
+                {
+                    SetStateToOpened();
+                    Open();
+                    loot.SetActive(true);
+                    gui.DisableInfoState();
+                }
+            }
+        }
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -31,7 +50,7 @@ public class ChestController : DetectorController
             else if (doorState == DoorState.Closed)
             {
                 gui.RenderOpen();
-                if (!player.HasKey)
+                if (!player.HasKeys)
                 {
                     gui.EnableInfoState();
                     gui.RenderState();
@@ -54,5 +73,10 @@ public class ChestController : DetectorController
     private void SetStateToClosed()
     {
         doorState = DoorState.Closed;
+    }
+    private void Open()
+    {
+        up.SetActive(false);
+        col.enabled = false;
     }
 }

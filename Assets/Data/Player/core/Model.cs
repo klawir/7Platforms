@@ -12,21 +12,24 @@ public class Model : MonoBehaviour
     public Atributes player;
     public Abilities abilities;
     public Text doubleJump;
+    public Text sprint;
+    public Text keysCollections;
 
     public float gravity;
     private bool isGrounded;
-    private bool keyJumpWall;
 
+    private void Start()
+    {
+        UpdateGUIKeysCollections();
+    }
     private void Update()
     {  
-        if (IsInTheAir || keyJumpWall)
+        if (IsInTheAir)
         {
             player.UpdatePos();
             if(IsAskew)
                 UpdateRotation();
         }
-        if (isGrounded)
-            KeyJumpWallFaded();
     }
     void FixedUpdate()
     {
@@ -59,27 +62,28 @@ public class Model : MonoBehaviour
     {
         get { return transform.rotation.x!=0; }
     }
-    public void WallJump()
-    {
-        Move.WallJump();
-        keyJumpWall = true;
-    }
     public void TakeKey()
     {
         Instantiate(key, hand);
+        UpdateGUIKeysCollections();
     }
-    public void TakePowerUp()
+    private void UpdateGUIKeysCollections()
+    {
+        keysCollections.text = "keys: "+hand.childCount;
+    }
+    public void UnlockDoubleJump()
     {
         abilities.jump.Unlock();
         doubleJump.color = Color.green;
     }
-    public void KeyJumpWallFaded()
+    public void UnlockSprint()
     {
-        keyJumpWall=false;
+        abilities.sprint.Unlock();
+        sprint.color = Color.green;
     }
-    public bool HasKey
+    public bool HasKeys
     {
-        get { return hand.childCount > 0; }
+        get { return hand.childCount == 5; }
     }
     public bool IsGrounded
     {

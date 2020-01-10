@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpControler : ItemToTakeControler
+public class PowerUpSprint : PowerUpControler
 {
-    public Model player;
-
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
@@ -21,6 +19,6 @@ public class PowerUpControler : ItemToTakeControler
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        player.TakePowerUp();
+        player.UnlockSprint();
     }
 }

@@ -2,7 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Command
+public abstract class Command: MonoBehaviour
 {
-    void Execute();
+    protected bool blockade;
+
+    public abstract void Execute();
+    public void Unlock()
+    {
+        blockade = false;
+    }
+    public void Lock()
+    {
+        blockade = true;
+    }
 }

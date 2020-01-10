@@ -1,12 +1,10 @@
-﻿using Player;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeysControler : ItemToTakeControler
+public abstract class PowerUpControler : ItemToTakeControler
 {
-    public Reward reward;
-    public Combat player;
+    public Model player;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -23,6 +21,5 @@ public class KeysControler : ItemToTakeControler
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        player.score.Add(reward);
     }
 }

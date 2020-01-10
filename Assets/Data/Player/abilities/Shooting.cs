@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : Ability
+public class Shooting : Command
 {
     private WeaponSwitcher weaponSwitcher;
     private Delay delay;

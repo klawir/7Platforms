@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jump : Ability
+public class Jump : Command
 {
     private Rigidbody rigidbody;
     private Model model;
