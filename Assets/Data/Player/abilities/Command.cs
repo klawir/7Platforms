@@ -7,6 +7,7 @@ public abstract class Command: MonoBehaviour
     protected bool blockade;
 
     public abstract void Execute();
+
     public void Unlock()
     {
         blockade = false;
@@ -14,5 +15,13 @@ public abstract class Command: MonoBehaviour
     public void Lock()
     {
         blockade = true;
+    }
+    public bool IsBlockade
+    {
+        get { return blockade; }
+    }
+    public bool Islocked
+    {
+        get { return blockade; }
     }
 }

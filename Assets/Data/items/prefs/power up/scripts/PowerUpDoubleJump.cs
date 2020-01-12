@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PowerUpDoubleJump : PowerUpControler
 {
+    protected override void Start()
+    {
+        base.Start();
+    }
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);

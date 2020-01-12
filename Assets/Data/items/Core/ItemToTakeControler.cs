@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ItemToTakeControler : DetectorController
 {
-    public Items.ToTake.GUI gui;
     public GameObject root;
     private Collider collider;
 
@@ -13,24 +12,18 @@ public class ItemToTakeControler : DetectorController
     {
         base.OnTriggerEnter(other);
         collider = other;
-        gui.EnableInfo();
-        gui.RenderDefault();
     }
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
-        gui.DisableInfo();
     }
     protected virtual void Update()
     {
         if (playerInZone)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-                Destroy(root);
-        }
+            Destroy(root);
     }
     protected virtual void OnDestroy()
     {
-        gui.DisableInfo();
+
     }
 }

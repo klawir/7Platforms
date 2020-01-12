@@ -6,6 +6,11 @@ public abstract class PowerUpControler : ItemToTakeControler
 {
     public Model player;
 
+    protected virtual void Start()
+    {
+        player = GameObject.FindObjectOfType<Model>();
+
+    }
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);

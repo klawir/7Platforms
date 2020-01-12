@@ -14,13 +14,20 @@ public class Model : MonoBehaviour
     public Text doubleJump;
     public Text sprint;
     public Text keysCollections;
+    public Text GUIname;
+    public Text gameTime;
+
+    public string name;
+    private float gametime;
+    private float loadedTime;
 
     public float gravity;
     private bool isGrounded;
 
-    private void Start()
+    public void Awake()
     {
         UpdateGUIKeysCollections();
+        UpdateNameNoLoadedDataFromFile();
     }
     private void Update()
     {  
@@ -30,6 +37,8 @@ public class Model : MonoBehaviour
             if(IsAskew)
                 UpdateRotation();
         }
+        gametime = Time.time+ loadedTime;
+        gameTime.text = "time: "+gametime.ToString();
     }
     void FixedUpdate()
     {
@@ -50,9 +59,26 @@ public class Model : MonoBehaviour
         if (col.gameObject.name == "Terrain")
             isGrounded = false;
     }
+    public float Gametime
+    {
+        get { return gametime; }
+    }
+    public float LoadedTime
+    {
+        set { loadedTime=value; }
+    }
     public void UpdateRotation()
     {
         transform.rotation = Quaternion.LookRotation(Move.movementVector);
+    }
+    public void UpdateNameNoLoadedDataFromFile()
+    {
+        name = RememberUserData.Name;
+        GUIname.text = name;
+    }
+    public void UpdateName()
+    {
+        GUIname.text = name;
     }
     public bool IsInTheAir
     {
@@ -81,9 +107,14 @@ public class Model : MonoBehaviour
         abilities.sprint.Unlock();
         sprint.color = Color.green;
     }
+
     public bool HasKeys
     {
         get { return hand.childCount == 5; }
+    }
+    public int KeyNumber
+    {
+        get { return hand.childCount; }
     }
     public bool IsGrounded
     {

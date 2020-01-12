@@ -5,26 +5,32 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    private float value;
+    private float amount;
     public Text text;
 
-    private void Start()
+    private void Awake()
     {
-        value = 0;
+        amount = 0;
         UpdateGUI();
+        
     }
     public void Add(Reward value)
     {
-        this.value += value.score;
+        this.amount += value.score;
         UpdateGUI();
     }
     public void Remove(float value)
     {
-        this.value -= value;
+        this.amount -= value;
         UpdateGUI();
     }
-    private void UpdateGUI()//duplicate with health
+    public void UpdateGUI()//duplicate with health
     {
-        text.text = "score: " + value.ToString();
+        text.text = "score: " + amount.ToString();
+    }
+    public float Value
+    {
+        get { return amount; }
+        set { amount = value; }
     }
 }

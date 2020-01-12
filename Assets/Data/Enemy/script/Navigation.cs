@@ -10,15 +10,33 @@ namespace Enemy
         public PlatformTerrain platform;
         public NavMeshAgent agent;
         public Transform model;
+        public Avoidance avoidance;
 
         private Vector3 pos;
 
         private void Update()
         {
             if (platform.IsPlayerDetected)
+            {
+                avoidance.Disable();
+                Enable();
                 Go();
+            }
+               
+            else
+            {
+                avoidance.Enable();
+                Disable();
+            }
         }
-
+        public void Enable()
+        {
+            agent.enabled = true;
+        }
+        public void Disable()
+        {
+            agent.enabled = false;
+        }
         private void Go()
         {
             InitPlayersPos();

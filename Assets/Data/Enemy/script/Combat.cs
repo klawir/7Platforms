@@ -17,6 +17,7 @@ namespace Enemy
         private void Start()
         {
             delay = new Delay(speed);
+
         }
         protected override void Update()
         {
@@ -50,6 +51,7 @@ namespace Enemy
         protected override void Die()
         {
             base.Die();
+            Destroy(transform.parent.gameObject);
         }
         private void OnDestroy()
         {

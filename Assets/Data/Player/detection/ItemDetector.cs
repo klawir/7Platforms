@@ -17,8 +17,4 @@ public class ItemDetector : MonoBehaviour
         if (other.CompareTag("itemToTake"))
             detectedItem = false;
     }
-    private void Update()
-    {
-
-    }
 }

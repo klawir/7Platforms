@@ -11,6 +11,8 @@ public class ItemToTake : ItemToTakeControler
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
+        player = other.GetComponent<Combat>();
+        Destroy(root);
     }
     protected override void OnTriggerExit(Collider other)
     {
@@ -24,7 +26,7 @@ public class ItemToTake : ItemToTakeControler
     {
         base.OnDestroy();
         player.score.Add(reward);
-        if(root.name=="key")
+        if(root.name=="key(Clone)")
             player.GetComponent<Model>().TakeKey();
     }
 }

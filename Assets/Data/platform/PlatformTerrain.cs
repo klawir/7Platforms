@@ -7,6 +7,9 @@ public class PlatformTerrain : MonoBehaviour
 {
     private bool playerDetected;
     private GameObject detectedPlayer;
+    public ZombieSpawnManager spawnManager;
+    public Transform zombieSpawnPoint;
+    public int zombieLimit;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -14,6 +17,8 @@ public class PlatformTerrain : MonoBehaviour
         {
             playerDetected = true;
             detectedPlayer = collision.gameObject;
+            if(!IsZombieLimit)
+                spawnManager.Spawn();
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -24,7 +29,10 @@ public class PlatformTerrain : MonoBehaviour
             detectedPlayer = null;
         }
     }
-
+    private bool IsZombieLimit
+    {
+        get { return zombieSpawnPoint.childCount >= zombieLimit; }
+    }
     public bool IsPlayerDetected
     {
         get { return playerDetected; }
