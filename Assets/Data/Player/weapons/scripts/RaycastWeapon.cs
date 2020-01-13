@@ -16,12 +16,11 @@ namespace Player
                 {
                     fwd = rifleBarrel.TransformDirection(Vector3.forward);
                     //Debug.DrawRay(rifleBarrel.position, fwd * 50, Color.green);
+                    Debug.Log("RaycastWeapon");
                     if (Physics.Raycast(rifleBarrel.position, fwd, out hit, 50))
                     {
                         if (hit.collider.gameObject.layer == 9)
-                        {
-                            Destroy(hit.collider.gameObject);
-                        }
+                            Destroy(hit.collider.transform.parent.gameObject);
                     }
                 }
             }

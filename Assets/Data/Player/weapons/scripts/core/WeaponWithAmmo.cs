@@ -16,7 +16,6 @@ namespace Player
                 public override void Shoot()
                 {
                     tempObj = Instantiate(bullet.gameObject, rifleBarrel.position, bullet.transform.rotation) as GameObject;
-                    
                 }
             }
         }

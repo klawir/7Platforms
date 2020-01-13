@@ -13,7 +13,7 @@ public class BaseCombat : MonoBehaviour
     }
     protected virtual void Die()
     {
-        Destroy(gameObject);
+
     }
     public virtual void TakeDmg(int dmg)
     {

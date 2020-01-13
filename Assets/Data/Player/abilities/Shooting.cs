@@ -16,7 +16,10 @@ public class Shooting : Command
         weaponSwitcher.SwitchToFastShootingWeapon();
         delay = new Delay(speed);
     }
-
+    public void Reinit(WeaponSwitcher weaponSwitcher)
+    {
+        speed = weaponSwitcher.CurrentChosenWeapon.speedAttack;
+    }
     public override void Execute()
     {
         if (delay.IsOver)

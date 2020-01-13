@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df728c2da290e82458bd6afa5408592e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1806740439845025023, guid: c77b83f31b2caa3459556f2733f6832b, type: 3}
   rifleBarrel: {fileID: 0}
+  speedAttack: 2
+  bullet: {fileID: 1806740439845025023, guid: c77b83f31b2caa3459556f2733f6832b, type: 3}

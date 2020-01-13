@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
+using Player;
 
 public class GameState : MonoBehaviour
 {
@@ -14,10 +15,15 @@ public class GameState : MonoBehaviour
     public KeySpawnManager keySpawnManager;
     public PowerUpSpawnManager powerUpSpawnManager;
     public Map map;
+    private DataToSave score;
+    private PlatformDataToSave[] platformDataToSave;
+    private BinaryFormatter binaryFormatter;
+    private FileStream stream;
 
     private void Awake()
     {
         path = Application.persistentDataPath + "/save.binary";
+        Debug.Log(Application.persistentDataPath);
     }
     private void Start()
     {
@@ -39,39 +45,28 @@ public class GameState : MonoBehaviour
         }
             
     }
-    public void Save()
+    private void SavePlatformsState()
     {
-        PlatformDataToSave[] platformDataToSave = new PlatformDataToSave[map.platforms.Count];
-
-        List<ZombieDataToSave[]> zombieDataToSave= new List<ZombieDataToSave[]>();
+        List<ZombieDataToSave[]> zombieDataToSave = new List<ZombieDataToSave[]>();
         ZombieDataToSave[] numberOfzombies;
+
         List<GameObject> zombies;
         int platformIndexWithZombies = 0;
 
         for (int a = 0; a < map.platforms.Count; a++)
         {
-            Debug.Log("platform "+a);
-           
-               Transform parent = map.platforms[a].GetComponent<ZombieSpawnManager>().zombieSpawnPoint;
+            Transform parent = map.platforms[a].GetComponent<ZombieSpawnManager>().zombieSpawnPoint;
             if (parent.childCount > 0)
             {
-                Debug.Log(parent.childCount+" zombies");
                 numberOfzombies = new ZombieDataToSave[parent.childCount];
                 zombies = new List<GameObject>();
 
                 foreach (Transform zombie in parent)
                     zombies.Add(zombie.gameObject);
                 for (int b = 0; b < numberOfzombies.Length; b++)
-                {
                     numberOfzombies[b] = new ZombieDataToSave(zombies[b]);
-                    Debug.Log(b + " " + numberOfzombies[b]);
-                }
-                Debug.Log("ZombieDataToSave[] " + numberOfzombies.Length);
                 zombieDataToSave.Add(numberOfzombies);
-                Debug.Log(a+" zombieDataToSave list counter " + zombieDataToSave.Count);
 
-                //foreach (ZombieDataToSave _zombieDataToSave in _zombie)
-                // Debug.Log(map.platforms[a] + " " + _zombieDataToSave.hp);
                 platformDataToSave[a] = new PlatformDataToSave(
                     map.platforms.IndexOf(map.platforms[a]),
                     map.platforms[a].GetComponent<ZombieSpawnManager>().zombieSpawnPoint.transform.childCount,
@@ -80,20 +75,41 @@ public class GameState : MonoBehaviour
                 platformIndexWithZombies++;
             }
         }
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream stream = new FileStream(path, FileMode.Create);
+    }
+    public void Save()
+    {
+        platformDataToSave = new PlatformDataToSave[map.platforms.Count];
+        
+        SavePlatformsState();
+        binaryFormatter = new BinaryFormatter();
+        stream = new FileStream(path, FileMode.Create);
 
-        DataToSave data = new DataToSave(playersScore, model, platformDataToSave);
-        binaryFormatter.Serialize(stream, data);
+        score = new DataToSave(playersScore, model, platformDataToSave);
+        binaryFormatter.Serialize(stream, score);
         stream.Close();
+    }
+    private void LoadPlatformsState()
+    {
+        int b = 0;
+        for (int a = 0; a < score.platformDataToSaves.Length; a++)
+        {
+            if (score.platformDataToSaves[a] != null && score.platformDataToSaves[a].zombieDataToSave.Length > 0)
+            {
+                map.platforms[score.platformDataToSaves[a].number].GetComponent<ZombieSpawnManager>().Spawn(
+                    score.platformDataToSaves[a].zombieDataToSave.Length,
+                    score.platformDataToSaves[a].zombieDataToSave[b].hp);
+                b++;
+            }
+            b = 0;
+        }
     }
     public void Load()
     {
         if (IsSaveExist)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-            DataToSave score = formatter.Deserialize(stream) as DataToSave;
+            binaryFormatter = new BinaryFormatter();
+            stream = new FileStream(path, FileMode.Open);
+            score = binaryFormatter.Deserialize(stream) as DataToSave;
 
             if (!score.unlockedSprint)
                 model.UnlockSprint();
@@ -103,27 +119,32 @@ public class GameState : MonoBehaviour
 
             playersScore.Value = score.score;
             model.name = score.name;
-            model.LoadedTime = score.gameTime;
+            TimeManager.instance. LoadedTime = score.gameTime;
             model.GetComponent<Health>().current= score.health;
 
             for (int a = 0; a < score.keyNumber; a++)
                 model.TakeKey();
-            int b = 0;
-            for (int a = 0; a < score.platformDataToSaves.Length; a++)
-            {
-                if (score.platformDataToSaves[a] != null && score.platformDataToSaves[a].zombieDataToSave.Length>0)
-                {
-                    map.platforms[score.platformDataToSaves[a].number].GetComponent<ZombieSpawnManager>().Spawn(
-                        score.platformDataToSaves[a].zombieDataToSave.Length,
-                        score.platformDataToSaves[a].zombieDataToSave[b].hp);
-                    b++;
-                }
-                b = 0;
-            }
+            
+            LoadPlatformsState();
             stream.Close();
         }
         else
             Debug.LogError("data not found at " + path);
+    }
+    public ScoreBoard.Score Load(ScoreBoard.Score _score)
+    {
+        binaryFormatter = new BinaryFormatter();
+        stream = new FileStream(path, FileMode.Open);
+        score = binaryFormatter.Deserialize(stream) as DataToSave;
+
+        _score.name.text = score.name;
+        _score.points.text = score.score.ToString();
+        _score.time.text = score.gameTime.ToString();
+        return _score;
+    }
+    public DataToSave Score
+    {
+        get { return score; }
     }
     public bool IsSaveExist
     {

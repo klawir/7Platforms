@@ -11,6 +11,13 @@ namespace Player
             public abstract class Weapon : MonoBehaviour, IWeapon
             {
                 public Transform rifleBarrel;
+                public float speedAttack;
+                protected Delay delay;
+
+                protected virtual void Start()
+                {
+                    delay = new Delay(speedAttack);
+                }
 
                 public abstract void Shoot();
             }

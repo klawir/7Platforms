@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Player;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class DataToSave
     {
         this.score = score.Value;
         name = model.name;
-        gameTime = model.Gametime;
+        gameTime = TimeManager.instance.Gametime;
         health = model.GetComponent<Health>().current;
         unlockedDoubleJump = model.abilities.jump.IsBlockade;
         unlockedSprint = model.abilities.sprint.IsBlockade;

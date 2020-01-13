@@ -24,7 +24,8 @@ public class ZombieSpawnManager : MonoBehaviour
             Health health = zombie.transform.Find("model").GetComponent<Health>();
             health.current = hp;
             health.GetComponent<Combat>().platformTerrain = platform;
-            zombie.transform.Find("navigation").GetComponent<Navigation>().platform = platform;
+            Navigation navigation = zombie.transform.Find("navigation").GetComponent<Navigation>();
+            navigation.platform = platform;
         }
     }
 }

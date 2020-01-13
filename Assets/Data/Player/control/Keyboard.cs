@@ -34,18 +34,27 @@ public class Keyboard : MonoBehaviour
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
             weaponSwitcher.SwitchToFastShootingWeapon();
+            abilities.shooting.Reinit(weaponSwitcher);
+        }
         if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             weaponSwitcher.SwitchToRaycastWeapon();
+            abilities.shooting.Reinit(weaponSwitcher);
+        }
         if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
             weaponSwitcher.SwitchToBazooke();
+            abilities.shooting.Reinit(weaponSwitcher);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
             abilities.jump.Execute();
 
         if (Input.GetMouseButton(0))
             abilities.shooting.Execute();
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) 
             if (!PauseMenuManagment.instance.pause.activeInHierarchy)
                 pauseMenu.Execute();
     }

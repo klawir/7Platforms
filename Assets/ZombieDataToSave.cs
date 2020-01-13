@@ -11,6 +11,5 @@ public class ZombieDataToSave
     {
         Health health= model.transform.Find("model").GetComponent<Health>();
         this.hp = health.current;
-        Debug.Log("ZombieDataToSave "+hp);
     }
 }

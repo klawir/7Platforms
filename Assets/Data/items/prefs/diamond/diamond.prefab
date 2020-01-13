@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3578711974936470952}
   - component: {fileID: 564655901362391306}
   - component: {fileID: 1539847053987098266}
-  - component: {fileID: 6355197184195995397}
-  m_Layer: 0
+  - component: {fileID: 1266847300}
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: itemToTake
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3578711974936470952
 Rigidbody:
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1000
---- !u!114 &6355197184195995397
+--- !u!114 &1266847300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,10 +147,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4416361106221776581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97e125a515eff51428e70926c790725b, type: 3}
+  m_Script: {fileID: 11500000, guid: 03e0ce8dce3766e48a49b6d6f26165e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gui: {fileID: 564655901362391306}
   root: {fileID: 7107633947084017298}
   reward: {fileID: 1539847053987098266}
   player: {fileID: 0}
@@ -169,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7107633947084017297
 Transform:
   m_ObjectHideFlags: 0

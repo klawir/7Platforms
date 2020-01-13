@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 2981765602325368849}
   - component: {fileID: 8995494740113297860}
   - component: {fileID: 6288810334731546071}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: model
   m_TagString: itemToTake
   m_Icon: {fileID: 0}

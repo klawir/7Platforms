@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpDoubleJump : PowerUpControler
+namespace OnTheGround
 {
-    protected override void Start()
+    public class PowerUpDoubleJump : PowerUpControler
     {
-        base.Start();
-    }
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-    }
-    protected override void OnTriggerExit(Collider other)
-    {
-        base.OnTriggerExit(other);
-    }
-    protected override void Update()
-    {
-        base.Update();
-    }
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-        player.UnlockDoubleJump();
+        protected override void Start()
+        {
+            base.Start();
+        }
+        protected override void OnTriggerEnter(Collider other)
+        {
+            base.OnTriggerEnter(other);
+        }
+        protected override void OnTriggerExit(Collider other)
+        {
+            base.OnTriggerExit(other);
+        }
+        protected override void Update()
+        {
+            base.Update();
+        }
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            player.UnlockDoubleJump();
+        }
     }
 }

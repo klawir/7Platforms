@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3409190386201439576}
   - component: {fileID: 3789489103513578443}
   - component: {fileID: 5304662114813055975}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: detector
   m_TagString: itemToTake
   m_Icon: {fileID: 0}
@@ -88,7 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2813f6e531da8a49904ed0e0a63a0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gui: {fileID: 3789489103513578443}
   root: {fileID: 4893348685499365317}
   player: {fileID: 0}
 --- !u!1 &4893348685499365317
