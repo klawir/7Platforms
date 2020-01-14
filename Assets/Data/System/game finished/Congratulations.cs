@@ -9,7 +9,7 @@ public class Congratulations : MonoBehaviour
     private Delay delay;
     public float timeToLoadScore;
     public GameState gameState;
-    public Scene scene;
+    public ManagerScene scene;
 
     private void OnEnable()
     {
@@ -20,7 +20,7 @@ public class Congratulations : MonoBehaviour
         if (delay.IsOver)
         {
             text.enabled = true;
-            gameState.Save();
+            gameState.Save(true);
             scene.Load("score board");
         }
     }

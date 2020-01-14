@@ -13,8 +13,11 @@ namespace OnTheGround
         protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-            player = other.GetComponent<Combat>();
-            Destroy(root);
+            if (other.gameObject.CompareTag("player"))
+            {
+                player = other.GetComponent<Combat>();
+                Destroy(root);
+            }
         }
         protected override void OnTriggerExit(Collider other)
         {

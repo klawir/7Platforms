@@ -10,6 +10,7 @@ namespace Player
         {
             public class Bazooke : WeaponWithAmmo
             {
+
                 public override void Shoot()
                 {
                     base.Shoot();

@@ -194,7 +194,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 461801294603132739}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: Load
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: game
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &461801294970692138
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,8 +399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92f0c28e9f8cf141b310696f00da8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveManager: {fileID: 0}
+  savedData: {fileID: 0}
   continueButton: {fileID: 461801294603132736}
+  GameUserInput: {fileID: 0}
 --- !u!1 &461801295404496649
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +596,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 461801295622980885}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &461801295732978927
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,15 +855,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Load
-        m_Mode: 5
+      - m_Target: {fileID: 1796256881}
+        m_MethodName: RenderNewGameUserInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: game
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &461801295874961211

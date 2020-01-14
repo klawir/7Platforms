@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChestController : DetectorController
@@ -6,7 +7,7 @@ public class ChestController : DetectorController
     private Model player;
     public Items.ToUse.GUI gui;
     public GameObject up;
-    public Collider col;
+    public List <Collider> col;
     public GameObject loot;
 
     enum DoorState
@@ -77,6 +78,7 @@ public class ChestController : DetectorController
     private void Open()
     {
         up.SetActive(false);
-        col.enabled = false;
+        foreach (Collider _col in col)
+            _col.enabled=false;
     }
 }

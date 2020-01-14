@@ -13,11 +13,12 @@ namespace Enemy
         private Delay delay;
         public float speed;
         public Reward reward;
+        
 
         private void Start()
         {
             delay = new Delay(speed);
-
+            delay.Init(speed);
         }
         protected override void Update()
         {

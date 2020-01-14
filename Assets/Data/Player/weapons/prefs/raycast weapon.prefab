@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rifleBarrel: {fileID: 0}
-  speedAttack: 2.5
+  speedAttack: 2
+  lineRenderer: {fileID: 0}

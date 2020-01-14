@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 4305483160836559541}
   - component: {fileID: 7257178856544119984}
   - component: {fileID: 3409190386201439576}
-  - component: {fileID: 3789489103513578443}
-  - component: {fileID: 5304662114813055975}
+  - component: {fileID: 8647093490601654008}
   m_Layer: 11
   m_Name: detector
   m_TagString: itemToTake
@@ -63,7 +62,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3789489103513578443
+--- !u!114 &8647093490601654008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,24 +71,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2213872093967909200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3790c4e4a223407468b67c8e5c56b365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  txtToDisplay: {fileID: 0}
---- !u!114 &5304662114813055975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2213872093967909200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2813f6e531da8a49904ed0e0a63a0d4, type: 3}
+  m_Script: {fileID: 11500000, guid: e49a08ebcd3d9404c919acb635f7cfc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 4893348685499365317}
-  player: {fileID: 0}
+  sprint: 1
 --- !u!1 &4893348685499365317
 GameObject:
   m_ObjectHideFlags: 0

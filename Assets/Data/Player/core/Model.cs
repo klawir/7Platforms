@@ -1,8 +1,5 @@
-﻿using Player.Model;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Model : MonoBehaviour
 {
@@ -11,10 +8,8 @@ public class Model : MonoBehaviour
     public Rigidbody rigidbody;
     public Atributes player;
     public Abilities abilities;
-    public Text doubleJump;
-    public Text sprint;
-    public Text keysCollections;
-    public Text GUIname;
+    public Health health;
+    public Player.GUI gui;
     public string name;
     
     public float gravity;
@@ -22,8 +17,8 @@ public class Model : MonoBehaviour
 
     public void Awake()
     {
-        UpdateGUIKeysCollections();
-        UpdateNameNoLoadedDataFromFile();
+        gui.UpdateGUIKeysCollections(hand);
+        LoadName();
     }
     private void Update()
     {  
@@ -58,14 +53,15 @@ public class Model : MonoBehaviour
     {
         transform.rotation = Quaternion.LookRotation(Move.movementVector);
     }
-    public void UpdateNameNoLoadedDataFromFile()
+    public void LoadName()
     {
         name = RememberUserData.Name;
-        GUIname.text = name;
+        gui.UpdateName(name);
     }
-    public void UpdateName()
+    public void LoadSavedData()
     {
-        GUIname.text = name;
+        gui.UpdateName(name);
+        gui.UpdateHealth(health);
     }
     public bool IsInTheAir
     {
@@ -78,21 +74,18 @@ public class Model : MonoBehaviour
     public void TakeKey()
     {
         Instantiate(key, hand);
-        UpdateGUIKeysCollections();
+        gui.UpdateGUIKeysCollections(hand);
     }
-    private void UpdateGUIKeysCollections()
-    {
-        keysCollections.text = "keys: "+hand.childCount;
-    }
+    
     public void UnlockDoubleJump()
     {
         abilities.jump.Unlock();
-        doubleJump.color = Color.green;
+        gui.DoubleJumpUnlock();
     }
     public void UnlockSprint()
     {
         abilities.sprint.Unlock();
-        sprint.color = Color.green;
+        gui.SprintUnlock();
     }
 
     public bool HasKeys

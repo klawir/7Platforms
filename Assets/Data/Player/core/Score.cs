@@ -26,7 +26,7 @@ namespace Player
             this.amount -= value;
             UpdateGUI();
         }
-        public void UpdateGUI()//duplicate with health
+        public void UpdateGUI()
         {
             text.text = "score: " + amount.ToString();
         }

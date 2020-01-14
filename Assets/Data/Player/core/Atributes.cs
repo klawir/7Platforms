@@ -4,16 +4,13 @@ using UnityEngine;
 
 namespace Player
 {
-    namespace Model
+    public class Atributes : MonoBehaviour
     {
-        public class Atributes : MonoBehaviour
-        {
-            public int speed;
+        public int speed;
 
-            public void UpdatePos()
-            {
-                transform.Translate(Move.movementVector);
-            }
+        public void UpdatePos()
+        {
+            transform.Translate(Move.movementVector);
         }
     }
 }

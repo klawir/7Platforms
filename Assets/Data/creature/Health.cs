@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     public float current;
-    public Text text;
+    public Player.GUI gui;
+
+    private void Awake()
+    {
+        gui.UpdateHealth(this);
+    }
 
     public bool IsDead
     {
         get { return current <= 0; }
-    }
-    public void UpdateGUI()//duplicate with score
-    {
-        text.text = "health: " + current.ToString();
     }
 }

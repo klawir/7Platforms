@@ -11,9 +11,9 @@ public class PlatformTerrain : MonoBehaviour
     public Transform zombieSpawnPoint;
     public int zombieLimit;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.layer==8)
+        if (collision.gameObject.CompareTag("player"))
         {
             playerDetected = true;
             detectedPlayer = collision.gameObject;
@@ -21,9 +21,9 @@ public class PlatformTerrain : MonoBehaviour
                 spawnManager.Spawn();
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.CompareTag("player"))
         {
             playerDetected = false;
             detectedPlayer = null;

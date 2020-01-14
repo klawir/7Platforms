@@ -4,11 +4,16 @@ using UnityEngine;
 
 namespace OnTheGround
 {
-    public class PowerUpSprint : PowerUpControler
+    public class PowerUpControler : ItemToTakeControler
     {
-        protected override void Start()
+        private Model player;
+
+        public bool sprint;
+
+        protected virtual void Start()
         {
-            base.Start();
+            player = GameObject.FindObjectOfType<Model>();
+
         }
         protected override void OnTriggerEnter(Collider other)
         {
@@ -25,7 +30,11 @@ namespace OnTheGround
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            player.UnlockSprint();
+
+            if (sprint)
+                player.UnlockSprint();
+            else
+                player.UnlockDoubleJump();
         }
     }
 }

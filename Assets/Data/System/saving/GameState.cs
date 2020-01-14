@@ -11,7 +11,7 @@ public class GameState : MonoBehaviour
     private string path;
     public Score playersScore;
     public Model model;
-    public Scene scene;
+    public ManagerScene scene;
     public KeySpawnManager keySpawnManager;
     public PowerUpSpawnManager powerUpSpawnManager;
     public Map map;
@@ -33,7 +33,7 @@ public class GameState : MonoBehaviour
             {
                 Load();
                 playersScore.UpdateGUI();
-                model.UpdateName();
+                model.LoadSavedData();
                 keySpawnManager.Spawn(model.KeyNumber);
                 powerUpSpawnManager.Spawn(model);
             }
@@ -76,7 +76,7 @@ public class GameState : MonoBehaviour
             }
         }
     }
-    public void Save()
+    public void Save(bool playerWon)
     {
         platformDataToSave = new PlatformDataToSave[map.platforms.Count];
         
@@ -84,7 +84,7 @@ public class GameState : MonoBehaviour
         binaryFormatter = new BinaryFormatter();
         stream = new FileStream(path, FileMode.Create);
 
-        score = new DataToSave(playersScore, model, platformDataToSave);
+        score = new DataToSave(playersScore, model, platformDataToSave, playerWon);
         binaryFormatter.Serialize(stream, score);
         stream.Close();
     }
@@ -140,7 +140,16 @@ public class GameState : MonoBehaviour
         _score.name.text = score.name;
         _score.points.text = score.score.ToString();
         _score.time.text = score.gameTime.ToString();
+        stream.Close();
         return _score;
+    }
+    public void Delete()
+    {
+        if (IsSaveExist)
+        {
+            if (score.gameSuccessed)
+                DeleteLastGameState();
+        }
     }
     public DataToSave Score
     {

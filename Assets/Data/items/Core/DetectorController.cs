@@ -9,10 +9,12 @@ public abstract class DetectorController : MonoBehaviour
     
     protected virtual void OnTriggerEnter(Collider other)
     {
-        playerInZone = true;
+        if(other.gameObject.CompareTag("player"))
+            playerInZone = true;
     }
     protected virtual void OnTriggerExit(Collider other)
     {
-        playerInZone = false;
+        if (other.gameObject.CompareTag("player"))
+            playerInZone = false;
     }
 }

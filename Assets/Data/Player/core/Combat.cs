@@ -7,11 +7,9 @@ namespace Player
     public class Combat : BaseCombat
     {
         public Score score;
-
-        private void Start()
-        {
-            health.UpdateGUI();
-        }
+        public GUI gui;
+        public Health health;
+        
         protected override void Update()
         {
             if (health.IsDead)
@@ -20,7 +18,7 @@ namespace Player
         public override void TakeDmg(int dmg)
         {
             base.TakeDmg(dmg);
-            health.UpdateGUI();
+            gui.UpdateHealth(health);
         }
     }
 }

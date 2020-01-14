@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameState loadManager;
+    public GameState savedData;
     public GameObject continueButton;
     public Popup GameUserInput;
 
     private void Start()
     {
-        if (loadManager.IsSaveExist)
+        if (savedData.IsSaveExist)
             continueButton.SetActive(true);
     }
     public void RenderNewGameUserInput()
