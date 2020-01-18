@@ -1,26 +1,30 @@
-﻿using Player;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement: Command
+namespace Player
 {
-    private Atributes atributes;
-    private Model model;
-    private float xAxis;
-    private float zAxis;
+    public class Movement : Command
+    {
+        private Atributes atributes;
+        private Model model;
+        private float xAxis;
+        private float zAxis;
+        private Transform root;
 
-    public Movement(Atributes atributes, Model model)
-    {
-        this.atributes = atributes;
-        this.model = model;
-    }
-    public override void Execute()
-    {
-        xAxis = Input.GetAxis("Horizontal") * atributes.speed * Time.deltaTime;
-        zAxis = Input.GetAxis("Vertical") * atributes.speed * Time.deltaTime;
-        Move.movementVector = new Vector3(xAxis, 0, zAxis);
-        atributes.UpdatePos();
-        model.UpdateRotation();
+        public Movement(Transform root, Model model)
+        {
+            this.atributes = model.GetComponent<Atributes>();
+            this.model = model;
+            this.root = root;
+        }
+        public override void Execute()
+        {
+            xAxis = Input.GetAxis("Horizontal") * atributes.speed * Time.deltaTime;
+            zAxis = Input.GetAxis("Vertical") * atributes.speed * Time.deltaTime;
+            Move.movementVector = new Vector3(xAxis, 0, zAxis);
+            root.Translate(Move.movementVector);
+            model.UpdateRotation();
+        }
     }
 }

@@ -10,34 +10,37 @@ namespace Enemy
         public int dmg;
         public Navigation navigation;
         public PlatformTerrain platformTerrain;
-        private Delay delay;
-        public float speed;
         public Reward reward;
-        
+        public float hitMomment;
+        private bool wasHit;
+        public AnimManager animManager;
 
-        private void Start()
-        {
-            delay = new Delay(speed);
-            delay.Init(speed);
-        }
         protected override void Update()
         {
             base.Update();
 
-            if(platformTerrain.IsPlayerDetected)
+            if (!health.IsDead)
             {
-                if (IsPlayerInRange)
+                if (platformTerrain.IsPlayerDetected)
                 {
-                    if(delay.IsOver)
+                    if (IsPlayerInRange)
                     {
-                        delay.Init(speed);
-                        Hit();
+                        animManager.Attack();
+                        if (animManager.IsHitMomment(hitMomment) && !wasHit)
+                        {
+                            Hit();
+                            wasHit = true;
+                        }
+                        if (animManager.IsBeginningOfAttack)
+                            wasHit = false;
                     }
                 }
             }
+            if (animManager.IsEndOfDeadAnim)
+                Destroy(transform.parent.gameObject);
         }
 
-        private bool IsPlayerInRange
+        public bool IsPlayerInRange
         {
             get { return Vector3.Distance(transform.position, platformTerrain.DetectedPlayerPos) < range; }
         }
@@ -52,7 +55,7 @@ namespace Enemy
         protected override void Die()
         {
             base.Die();
-            Destroy(transform.parent.gameObject);
+            animManager.Die();
         }
         private void OnDestroy()
         {

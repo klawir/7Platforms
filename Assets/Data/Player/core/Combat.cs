@@ -8,7 +8,6 @@ namespace Player
     {
         public Score score;
         public GUI gui;
-        public Health health;
         
         protected override void Update()
         {

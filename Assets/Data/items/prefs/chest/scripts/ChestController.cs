@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Player;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +7,9 @@ public class ChestController : DetectorController
 {
     private Model player;
     public Items.ToUse.GUI gui;
-    public GameObject up;
     public List <Collider> col;
     public GameObject loot;
+    public Transform up;
 
     enum DoorState
     {
@@ -21,6 +22,7 @@ public class ChestController : DetectorController
     void Start()
     {
         SetStateToClosed();
+        Open();
     }
     void Update()
     {
@@ -31,7 +33,7 @@ public class ChestController : DetectorController
                 if (doorState == DoorState.Closed)
                 {
                     SetStateToOpened();
-                    Open();
+                    
                     loot.SetActive(true);
                     gui.DisableInfoState();
                 }
@@ -65,6 +67,8 @@ public class ChestController : DetectorController
         base.OnTriggerExit(other);
         gui.DisableInfoState();
         gui.DisableInfo();
+        if (doorState == DoorState.Opened)
+            Close();
     }
 
     private void SetStateToOpened()
@@ -77,8 +81,10 @@ public class ChestController : DetectorController
     }
     private void Open()
     {
-        up.SetActive(false);
-        foreach (Collider _col in col)
-            _col.enabled=false;
+
+    }
+    private void Close()
+    {
+
     }
 }

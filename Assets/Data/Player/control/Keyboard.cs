@@ -1,5 +1,6 @@
 ﻿using Menu;
-using Player.Weapon.Model;
+using Player;
+using Player.Weapon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,9 @@ public class Keyboard : MonoBehaviour
 {
     public GameObject playerTransf;
     public Model playersModel;
-    public WeaponSwitcher weaponSwitcher;
+    public WeaponManager weaponSwitcher;
     public Abilities abilities;
+    public AnimManager animManager;
 
     private Command pauseMenu;
 
@@ -26,6 +28,7 @@ public class Keyboard : MonoBehaviour
                 || Input.GetKey(KeyCode.S)
                 || Input.GetKey(KeyCode.D))
             {
+                animManager.Go();
                 abilities.movement.Execute();
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                     abilities.sprint.Execute();
@@ -33,6 +36,11 @@ public class Keyboard : MonoBehaviour
                     abilities.backToNormalSpeed.Execute();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1)
+            || Input.GetKeyDown(KeyCode.Alpha2)
+            || Input.GetKeyDown(KeyCode.Alpha3))
+            weaponSwitcher.DeleteCurrentChosenIfExist();
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weaponSwitcher.SwitchToFastShootingWeapon();
@@ -52,7 +60,10 @@ public class Keyboard : MonoBehaviour
             abilities.jump.Execute();
 
         if (Input.GetMouseButton(0))
+        {
             abilities.shooting.Execute();
+            animManager.Attack();
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape)) 
             if (!PauseMenuManagment.instance.pause.activeInHierarchy)
