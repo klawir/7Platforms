@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackToNormalSpeed : Command
+public class BackToNormalSpeed :Ability, Command
 {
     private Atributes atributes;
     private int speed;

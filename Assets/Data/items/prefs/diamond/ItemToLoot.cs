@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemToLoot : DetectorController
 {
@@ -10,6 +9,7 @@ public class ItemToLoot : DetectorController
     public Reward reward;
     public Combat player;
     public Congratulations Congratulations;
+    public Items.ToTake.GUI gui;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -24,12 +24,15 @@ public class ItemToLoot : DetectorController
     {
         if (playerInZone)
         {
+            gui.EnableInfo();
+            gui.RenderDefault();
             if (Input.GetKeyDown(KeyCode.E))
                 Destroy(root);
         }
     }
     void OnDestroy()
     {
+        gui.DisableInfo();
         player.score.Add(reward);
         Congratulations.enabled = true;
     }

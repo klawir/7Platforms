@@ -9,8 +9,8 @@ public class TimeManager : MonoBehaviour
     public List<GameObject> gameComponents;
 
     private float loadedTime;
-    private float gametime;
-    private float startTime;
+    private float gamePlayTime;
+    private float totalApplicationRunTime;
 
     public Text gameTime;
 
@@ -20,7 +20,7 @@ public class TimeManager : MonoBehaviour
     }
     private void Start()
     {
-        startTime = Time.time;
+        totalApplicationRunTime = Time.time;
     }
     private void Update()
     {
@@ -34,11 +34,11 @@ public class TimeManager : MonoBehaviour
     }
     private void TakeTime()
     {
-        gametime = Time.time + loadedTime - startTime;
+        gamePlayTime = Time.time + loadedTime - totalApplicationRunTime;
     }
     private void UpdateGUI()
     {
-        gameTime.text = "time: " + gametime.ToString();
+        gameTime.text = gamePlayTime.ToString();
     }
     public void Resume()
     {
@@ -58,7 +58,7 @@ public class TimeManager : MonoBehaviour
 
     public float Gametime
     {
-        get { return gametime; }
+        get { return gamePlayTime; }
     }
     public float LoadedTime
     {

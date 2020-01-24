@@ -13,10 +13,11 @@ namespace Player
                 public Transform rifleBarrel;
                 public float speedAttack;
                 protected Delay delay;
+                public AudioSource audio;
 
                 protected virtual void Start()
                 {
-                    delay = new Delay(speedAttack);
+                    delay = new Delay();
                 }
 
                 public abstract void Shoot();

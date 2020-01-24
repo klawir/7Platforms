@@ -5,9 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class ManagerScene : MonoBehaviour
 {
-    public void Load(string name)
+    private string gameScene;
+    private string mainMenu;
+    private string scoreBoard;
+
+    private void Awake()
     {
-        SceneManager.LoadScene(name);
+        gameScene = "game";
+        mainMenu = "main menu";
+        scoreBoard = "score board";
+    }
+
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene(gameScene);
+    }
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(mainMenu);
+    }
+    public void LoadScoreBoard()
+    {
+        SceneManager.LoadScene(scoreBoard);
     }
     public void Exit()
     {
@@ -15,6 +34,6 @@ public class ManagerScene : MonoBehaviour
     }
     public bool IsGameSceneCurrentlyLoaded
     {
-        get { return Application.loadedLevelName == "game"; }
+        get { return Application.loadedLevelName == gameScene; }
     }
 }

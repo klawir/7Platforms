@@ -6,7 +6,13 @@ using UnityEngine.UI;
 public class Popup : MonoBehaviour
 {
     public InputField userName;
+    public ManagerScene managerScene;
+    public CursorManager cursorManager;
 
+    private void OnDisable()
+    {
+        DeleteEnteredData();
+    }
     public void TurnOffWindow()
     {
         gameObject.SetActive(false);
@@ -17,10 +23,23 @@ public class Popup : MonoBehaviour
     }
     public void DeleteEnteredData()
     {
-        userName.text = " ";
+        userName.text="";
     }
-    public void RememberUserName()
+    private void RememberUserName()
     {
         RememberUserData.SetName(userName.text);
+    }
+    public void Accept()
+    {
+        if(IsUserNameNotEmpty)
+        {
+            RememberUserName();
+            managerScene.LoadGameScene();
+            cursorManager.Disable();
+        }
+    }
+    private bool IsUserNameNotEmpty
+    {
+        get { return !string.IsNullOrEmpty(userName.text); }
     }
 }

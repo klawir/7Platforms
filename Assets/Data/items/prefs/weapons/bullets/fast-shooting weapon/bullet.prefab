@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   momentum: {fileID: -702679420608873286}
-  speed: 30
-  dmg: 2
+  speed: 60
   effect: {fileID: 100002, guid: 0b24f31f464fa614a84acdeac974ed6b, type: 3}
+  dmg: 2
 --- !u!54 &-702679420608873286
 Rigidbody:
   m_ObjectHideFlags: 0

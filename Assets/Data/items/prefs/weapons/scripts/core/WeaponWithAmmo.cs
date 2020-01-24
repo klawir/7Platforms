@@ -16,7 +16,7 @@ namespace Player
 
                 public override void Shoot()
                 {
-                    tempObj = Instantiate(bullet.gameObject, rifleBarrel) as GameObject;
+                    tempObj = Instantiate(bullet.gameObject, rifleBarrel.position, Quaternion.Euler(bullet.transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0)) as GameObject;
                     Instantiate(shootEffect, rifleBarrel.position, shootEffect.transform.rotation);
                 }
             }

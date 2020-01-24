@@ -16,7 +16,7 @@ public class KeySpawnManager : MonoBehaviour
         foreach (Transform transform in spawnPoints)
             Instantiate(pref, transform);
     }
-    public void Spawn(int numberOkKeysToDelete)
+    public void LoadSpawnState(int numberOkKeysToDelete)
     {
         for(int a=0;a< numberOkKeysToDelete;a++)
             DeleteOneKey();

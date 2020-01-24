@@ -9,13 +9,15 @@ using Player;
 public class GameState : MonoBehaviour
 {
     private string path;
+    public Player.GUI gui;
     public Score playersScore;
-    public Model model;
+    public Model playerModel;
+    public Abilities playerAtributes;
     public ManagerScene scene;
     public KeySpawnManager keySpawnManager;
     public PowerUpSpawnManager powerUpSpawnManager;
     public Map map;
-    private DataToSave score;
+    private DataToSave gameDataState;
     private PlatformDataToSave[] platformDataToSave;
     private BinaryFormatter binaryFormatter;
     private FileStream stream;
@@ -32,10 +34,10 @@ public class GameState : MonoBehaviour
             if (IsSaveExist)
             {
                 Load();
-                playersScore.UpdateGUI();
-                model.LoadSavedData();
-                keySpawnManager.Spawn(model.KeyNumber);
-                powerUpSpawnManager.Spawn(model);
+                gui.UpdateScore(gameDataState.score);
+                playerModel.LoadGameState();
+                keySpawnManager.LoadSpawnState(playerModel.KeyNumber);
+                powerUpSpawnManager.Spawn(playerModel);
             }
             else
             {
@@ -43,7 +45,6 @@ public class GameState : MonoBehaviour
                 powerUpSpawnManager.Spawn();
             }
         }
-            
     }
     private void SavePlatformsState()
     {
@@ -84,20 +85,20 @@ public class GameState : MonoBehaviour
         binaryFormatter = new BinaryFormatter();
         stream = new FileStream(path, FileMode.Create);
 
-        score = new DataToSave(playersScore, model, platformDataToSave, playerWon);
-        binaryFormatter.Serialize(stream, score);
+        gameDataState = new DataToSave(playersScore, playerModel, platformDataToSave, playerWon);
+        binaryFormatter.Serialize(stream, gameDataState);
         stream.Close();
     }
     private void LoadPlatformsState()
     {
         int b = 0;
-        for (int a = 0; a < score.platformDataToSaves.Length; a++)
+        for (int a = 0; a < gameDataState.platformDataToSaves.Length; a++)
         {
-            if (score.platformDataToSaves[a] != null && score.platformDataToSaves[a].zombieDataToSave.Length > 0)
+            if (gameDataState.platformDataToSaves[a] != null && gameDataState.platformDataToSaves[a].zombieDataToSave.Length > 0)
             {
-                map.platforms[score.platformDataToSaves[a].number].GetComponent<ZombieSpawnManager>().Spawn(
-                    score.platformDataToSaves[a].zombieDataToSave.Length,
-                    score.platformDataToSaves[a].zombieDataToSave[b].hp);
+                map.platforms[gameDataState.platformDataToSaves[a].number].GetComponent<ZombieSpawnManager>().Spawn(
+                    gameDataState.platformDataToSaves[a].zombieDataToSave.Length,
+                    gameDataState.platformDataToSaves[a].zombieDataToSave[b].hp);
                 b++;
             }
             b = 0;
@@ -109,21 +110,21 @@ public class GameState : MonoBehaviour
         {
             binaryFormatter = new BinaryFormatter();
             stream = new FileStream(path, FileMode.Open);
-            score = binaryFormatter.Deserialize(stream) as DataToSave;
+            gameDataState = binaryFormatter.Deserialize(stream) as DataToSave;
 
-            if (!score.unlockedSprint)
-                model.UnlockSprint();
+            if (!gameDataState.unlockedSprint)
+                playerAtributes.UnlockSprint();
 
-            if (!score.unlockedDoubleJump)
-                model.UnlockDoubleJump();
+            if (!gameDataState.unlockedDoubleJump)
+                playerAtributes.UnlockDoubleJump();
 
-            playersScore.Value = score.score;
-            model.name = score.name;
-            TimeManager.instance. LoadedTime = score.gameTime;
-            model.GetComponent<Health>().current= score.health;
+            playersScore.Value = gameDataState.score;
+            playerModel.name = gameDataState.name;
+            TimeManager.instance. LoadedTime = gameDataState.gameTime;
+            playerModel.GetComponent<Health>().current= gameDataState.health;
 
-            for (int a = 0; a < score.keyNumber; a++)
-                model.TakeKey();
+            for (int a = 0; a < gameDataState.keyNumber; a++)
+                playerModel.TakeKey();
             
             LoadPlatformsState();
             stream.Close();
@@ -135,11 +136,11 @@ public class GameState : MonoBehaviour
     {
         binaryFormatter = new BinaryFormatter();
         stream = new FileStream(path, FileMode.Open);
-        score = binaryFormatter.Deserialize(stream) as DataToSave;
+        gameDataState = binaryFormatter.Deserialize(stream) as DataToSave;
 
-        _score.name.text = score.name;
-        _score.points.text = score.score.ToString();
-        _score.time.text = score.gameTime.ToString();
+        _score.name.text = gameDataState.name;
+        _score.points.text = gameDataState.score.ToString();
+        _score.time.text = gameDataState.gameTime.ToString();
         stream.Close();
         return _score;
     }
@@ -147,13 +148,13 @@ public class GameState : MonoBehaviour
     {
         if (IsSaveExist)
         {
-            if (score.gameSuccessed)
+            if (gameDataState.gameSuccessed)
                 DeleteLastGameState();
         }
     }
-    public DataToSave Score
+    public DataToSave GameDataState
     {
-        get { return score; }
+        get { return gameDataState; }
     }
     public bool IsSaveExist
     {

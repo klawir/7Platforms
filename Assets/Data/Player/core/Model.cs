@@ -1,5 +1,4 @@
-﻿using Player;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player
 {
@@ -8,7 +7,7 @@ namespace Player
         public Transform waist;
         public GameObject key;
         public Rigidbody rigidbody;
-        public Transform player;
+        public Transform root;
         public Abilities abilities;
         public Health health;
         public GUI gui;
@@ -28,12 +27,13 @@ namespace Player
             if (!(Input.GetKey(KeyCode.W) ||
                 Input.GetKey(KeyCode.A) ||
                 Input.GetKey(KeyCode.S) ||
-                Input.GetKey(KeyCode.D)))
+                Input.GetKey(KeyCode.D)) &&
+                !(Input.GetMouseButton(0)))
                 animManager.Idle();
 
             if (IsInTheAir)
             {
-                player.Translate(Move.movementVector);
+                root.Translate(Move.movementVector);
                 animManager.Go();
                 if (IsAskew)
                     UpdateRotation();
@@ -41,7 +41,7 @@ namespace Player
         }
         void FixedUpdate()
         {
-            rigidbody.AddForce(Vector3.down * gravity * rigidbody.mass);
+            rigidbody.AddForce(Vector3.down * gravity);
         }
 
         void OnCollisionEnter(Collision col)
@@ -62,16 +62,6 @@ namespace Player
         {
             transform.rotation = Quaternion.LookRotation(Move.movementVector);
         }
-        public void LoadName()
-        {
-            name = RememberUserData.Name;
-            gui.UpdateName(name);
-        }
-        public void LoadSavedData()
-        {
-            gui.UpdateName(name);
-            gui.UpdateHealth(health);
-        }
         public bool IsInTheAir
         {
             get { return !isGrounded; }
@@ -86,20 +76,9 @@ namespace Player
             gui.UpdateGUIKeysCollections(waist);
         }
 
-        public void UnlockDoubleJump()
-        {
-            abilities.jump.Unlock();
-            gui.DoubleJumpUnlock();
-        }
-        public void UnlockSprint()
-        {
-            abilities.sprint.Unlock();
-            gui.SprintUnlock();
-        }
-
         public bool HasKeys
         {
-            get { return waist.childCount == 5; }
+            get { return waist.childCount >= 5; }
         }
         public int KeyNumber
         {
@@ -108,6 +87,18 @@ namespace Player
         public bool IsGrounded
         {
             get { return isGrounded; }
+        }
+
+
+        public void LoadName()
+        {
+            name = RememberUserData.Name;
+            gui.UpdateName(name);
+        }
+        public void LoadGameState()
+        {
+            gui.UpdateName(name);
+            gui.UpdateHealth(health);
         }
     }
 }

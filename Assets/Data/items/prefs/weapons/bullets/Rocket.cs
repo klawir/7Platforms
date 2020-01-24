@@ -5,7 +5,10 @@ using UnityEngine;
 public class Rocket : Bullet
 {
     public GameObject explosion;
-
+    protected override void Update()
+    {
+        base.Update();
+    }
     public override void Momentum(Transform rifleBarrel)
     {
         base.Momentum(rifleBarrel);

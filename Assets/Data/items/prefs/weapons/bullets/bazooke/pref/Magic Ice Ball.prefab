@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   momentum: {fileID: 5821558292268435231}
   speed: 0
-  effect: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
-  dmg: 5
+  effect: {fileID: 100006, guid: e4704660d196fac40802911e12ac76f1, type: 3}
+  dmg: 15
 --- !u!135 &5232014725156528087
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13991,7 +13991,6 @@ GameObject:
   - component: {fileID: 1970460336267915142}
   - component: {fileID: 5637222723432245761}
   - component: {fileID: 4983641013101782756}
-  - component: {fileID: -7037045512921510620}
   m_Layer: 12
   m_Name: Magic Ice Ball
   m_TagString: Untagged
@@ -18738,7 +18737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   momentum: {fileID: 5637222723432245761}
   speed: 30
-  effect: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
+  effect: {fileID: 0}
   explosion: {fileID: 936215470040664701}
 --- !u!54 &5637222723432245761
 Rigidbody:
@@ -18769,16 +18768,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7037045512921510620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6434354434292319372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcdcb823d2960ad4cbbd2e08bf170a31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 4

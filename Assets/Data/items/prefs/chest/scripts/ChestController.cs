@@ -22,7 +22,6 @@ public class ChestController : DetectorController
     void Start()
     {
         SetStateToClosed();
-        Open();
     }
     void Update()
     {
@@ -30,10 +29,10 @@ public class ChestController : DetectorController
         {
             if (Input.GetKeyDown(KeyCode.E) && player.HasKeys)
             {
-                if (doorState == DoorState.Closed)
+                if (IsClosed)
                 {
                     SetStateToOpened();
-                    
+                    Open();
                     loot.SetActive(true);
                     gui.DisableInfoState();
                 }
@@ -48,9 +47,9 @@ public class ChestController : DetectorController
         if (other.CompareTag("player"))
         {
             player = other.GetComponent<Model>();
-            if (doorState == DoorState.Opened)
+            if (IsOpened)
                 gui.RenderDefault();
-            else if (doorState == DoorState.Closed)
+            else if (IsClosed)
             {
                 gui.RenderOpen();
                 if (!player.HasKeys)
@@ -67,8 +66,11 @@ public class ChestController : DetectorController
         base.OnTriggerExit(other);
         gui.DisableInfoState();
         gui.DisableInfo();
-        if (doorState == DoorState.Opened)
+        if (IsOpened)
+        {
             Close();
+            loot.SetActive(false);
+        }
     }
 
     private void SetStateToOpened()
@@ -79,12 +81,21 @@ public class ChestController : DetectorController
     {
         doorState = DoorState.Closed;
     }
+    private bool IsOpened
+    {
+        get { return doorState == DoorState.Opened; }
+    }
+    private bool IsClosed
+    {
+        get { return doorState == DoorState.Closed; }
+    }
     private void Open()
     {
-
+        up.rotation = Quaternion.Euler(0, -90, -90);
     }
     private void Close()
     {
-
+        up.rotation = Quaternion.Euler(0, -90, 0);
+        SetStateToClosed();
     }
 }

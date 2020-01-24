@@ -5,11 +5,10 @@ using UnityEngine;
 public class Delay : MonoBehaviour
 {
     private float nextActionTime;
-    private float frequency;
 
-    public Delay(float period)
+    public Delay()
     {
-        this.frequency = period;
+        nextActionTime = 0;
     }
 
     public bool IsOver
@@ -18,6 +17,10 @@ public class Delay : MonoBehaviour
     }
     public void Init(float value)
     {
-        nextActionTime += value;
+        nextActionTime = Time.time+value;
+    }
+    public void Test()
+    {
+        Debug.Log(Time.time+" "+ nextActionTime);
     }
 }

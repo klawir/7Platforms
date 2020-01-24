@@ -12,7 +12,11 @@ public class Penalty : MonoBehaviour
 
     private void Start()
     {
-        delay = new Delay(frequency);
+        delay = new Delay();
+        RestartGame();
+    }
+    private void RestartGame()
+    {
         delay.Init(frequency);
     }
     void Update()

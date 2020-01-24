@@ -29,7 +29,7 @@ namespace Items
             }
             public void RenderState()
             {
-                txtToDisplayState.text = "Need the key";
+                txtToDisplayState.text = "You need 5 keys";
             }
         }
     }

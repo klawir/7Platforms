@@ -14,14 +14,18 @@ namespace Player
                 private Vector3 fwd;
                 public LineRenderer line;
 
+                protected override void Start()
+                {
+                    base.Start();
+                }
                 public override void Shoot()
                 {
                     fwd = rifleBarrel.TransformDirection(Vector3.forward);
-                    //Debug.DrawRay(rifleBarrel.position, fwd * 50, Color.green);
-                    Instantiate(line, rifleBarrel.position, transform.rotation);
+                    Instantiate(line.gameObject, rifleBarrel.position, Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0));
+
                     if (Physics.Raycast(rifleBarrel.position, fwd, out hit, 50))
                     {
-                        if (hit.collider.gameObject.layer == 9)
+                        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("enemy"))
                             Destroy(hit.collider.transform.parent.gameObject);
                     }
                 }

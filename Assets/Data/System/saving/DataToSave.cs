@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class DataToSave 
 {
-    public float score;
+    public int score;
     public string name;
     public float gameTime;
     public float health;

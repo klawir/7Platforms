@@ -3,16 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jump : Command
+public class Jump : Ability, Command
 {
-    private Rigidbody rigidbody;
-    private Model model;
-    private float velocity;
-    private bool canDoubleAvailable;
+    protected Rigidbody rigidbody;
+    public float velocity;
+
+    protected Model model;
+    protected bool canDoubleAvailable;
 
     public Jump(GameObject modelObj)
     {
-        velocity = 10;
+        velocity = 7;
         rigidbody = modelObj.GetComponent<Rigidbody>();
         model = modelObj.GetComponent<Model>();
         canDoubleAvailable = true;
@@ -23,16 +24,20 @@ public class Jump : Command
         {
             if (!canDoubleAvailable)
                 canDoubleAvailable = true;
-            rigidbody.velocity = Vector3.up * velocity;
+            Do();
         }
         else
         {
             if (canDoubleAvailable && !blockade)
             {
-                rigidbody.velocity = Vector3.up * velocity;
+                Do();
                 if (canDoubleAvailable)
                     canDoubleAvailable = false;
             }
         }
+    }
+    protected void Do()
+    {
+        rigidbody.velocity = Vector3.up * velocity;
     }
 }

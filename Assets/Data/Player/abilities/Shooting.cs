@@ -4,30 +4,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : Command
+public class Shooting :Ability, Command
 {
-    private WeaponManager weaponSwitcher;
     private Delay delay;
     public float speed;
+    public float shootMomentInPercent;
+
+    private Weapon weapon;
+    private AudioSource weaponsSFX;
+    private AnimManager animManager;
 
     public Shooting(WeaponManager weaponSwitcher)
     {
-        this.weaponSwitcher = weaponSwitcher;
         weaponSwitcher.SwitchToFastShootingWeapon();
-        delay = new Delay(speed);
+        delay = new Delay();
+        delay.Init(speed);
+        weapon = weaponSwitcher.CurrentChosenWeapon;
+        animManager = weaponSwitcher.animManager;
     }
-    public void Reinit(WeaponManager weaponSwitcher)
+    public void InitChosenWeapon(WeaponManager weaponSwitcher)
     {
         delay.Init(speed);
-        this.weaponSwitcher = weaponSwitcher;
         speed = weaponSwitcher.CurrentChosenWeapon.speedAttack;
+        weapon = weaponSwitcher.CurrentChosenWeapon;
+        weaponsSFX = weapon.audio;
+        animManager = weaponSwitcher.animManager;
     }
     public override void Execute()
     {
-        if (delay.IsOver)
+        animManager.Attack();
+        if (!delay.IsOver)
+            animManager.ResetAttack();
+        if (animManager.IsHitMomment)
         {
+            weaponsSFX.Play();
+            weapon.Shoot();
             delay.Init(speed);
-            weaponSwitcher.CurrentChosenWeapon.Shoot();
         }
     }
 }

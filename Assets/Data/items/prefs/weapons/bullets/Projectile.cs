@@ -6,8 +6,11 @@ using UnityEngine;
 public class Projectile : Bullet
 {
     public int dmg;
-    
 
+    protected override void Update()
+    {
+        base.Update();
+    }
     public override void Momentum(Transform rifleBarrel)
     {
         base.Momentum(rifleBarrel);
@@ -16,14 +19,13 @@ public class Projectile : Bullet
     {
         if (other.CompareTag("enemy"))
         {
-            target = other.gameObject;
+            target = other;
             other.GetComponent<BaseCombat>().TakeDmg(dmg);
             Destroy(gameObject);
         }
     }
     private void OnDestroy()
     {
-        effect.transform.rotation = target.transform.rotation;
-        Instantiate(effect, transform.position, effect.transform.rotation);
+        Instantiate(effect, target.bounds.center, Quaternion.Inverse(target.transform.rotation));
     }
 }

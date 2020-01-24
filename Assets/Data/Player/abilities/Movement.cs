@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Movement : Command
+    public class Movement : Ability, Command
     {
         private Atributes atributes;
         private Model model;

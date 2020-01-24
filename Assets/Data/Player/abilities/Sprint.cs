@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sprint : Command
+public class Sprint : Ability, Command
 {
     private Atributes atributes;
     private int accelerate;

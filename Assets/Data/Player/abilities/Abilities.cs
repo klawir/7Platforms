@@ -11,12 +11,13 @@ namespace Player
         public Model playersModel;
         public WeaponManager weaponSwitcher;
         public Transform root;
+        public GUI gui;
 
         public Shooting shooting;
-        public Command movement;
-        public Command jump;
-        public Command sprint;
-        public Command backToNormalSpeed;
+        public Ability movement;
+        public Ability jump;
+        public Ability sprint;
+        public Ability backToNormalSpeed;
 
         private bool wasJumping;
 
@@ -29,7 +30,7 @@ namespace Player
             sprint.Lock();
             backToNormalSpeed = new BackToNormalSpeed(atributes);
             shooting = new Shooting(weaponSwitcher);
-            shooting.Reinit(weaponSwitcher);
+            shooting.InitChosenWeapon(weaponSwitcher);
         }
         private void Update()
         {
@@ -40,6 +41,19 @@ namespace Player
                 backToNormalSpeed.Execute();
                 wasJumping = false;
             }
+        }
+
+        public void UnlockDoubleJump()
+        {
+            jump.Unlock();
+            gui.DoubleJumpUnlock();
+            UISpawnManager.instance.SpawnDoubleJumpInfo();
+        }
+        public void UnlockSprint()
+        {
+            sprint.Unlock();
+            gui.SprintUnlock();
+            UISpawnManager.instance.SpawnSprintInfo();
         }
     }
 }

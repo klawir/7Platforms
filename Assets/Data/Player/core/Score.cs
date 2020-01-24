@@ -1,36 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Player
 {
     public class Score : MonoBehaviour
     {
-        private float amount;
-        public Text text;
+        private int amount;
+        public GUI gui;
 
         private void Awake()
         {
             amount = 0;
-            UpdateGUI();
-
+            gui.UpdateScore(amount);
         }
         public void Add(Reward value)
         {
             this.amount += value.score;
-            UpdateGUI();
+            gui.UpdateScore(amount);
         }
-        public void Remove(float value)
+        public void Remove(int value)
         {
             this.amount -= value;
-            UpdateGUI();
+            gui.UpdateScore(amount);
         }
-        public void UpdateGUI()
-        {
-            text.text = "score: " + amount.ToString();
-        }
-        public float Value
+        public int Value
         {
             get { return amount; }
             set { amount = value; }

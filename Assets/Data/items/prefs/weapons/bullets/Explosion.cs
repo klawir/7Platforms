@@ -15,8 +15,7 @@ public class Explosion : BulletDecorator
     {
         if (other.CompareTag("enemy"))
         {
-            Debug.Log("3");
-            target = other.gameObject;
+            target = other;
             other.GetComponent<BaseCombat>().TakeDmg(dmg);
             Destroy(transform.parent.gameObject);
         }

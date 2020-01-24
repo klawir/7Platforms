@@ -29,12 +29,11 @@ namespace Menu
         public void TurnOffWindow()
         {
             pause.SetActive(false);
-            TimeManager.instance.Resume(); 
+            
         }
         public void TurnOnWindow()
         {
             pause.SetActive(true);
-            TimeManager.instance.Stop();
         }
     }
 }

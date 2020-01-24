@@ -44,29 +44,31 @@ public class Keyboard : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weaponSwitcher.SwitchToFastShootingWeapon();
-            abilities.shooting.Reinit(weaponSwitcher);
+            abilities.shooting.InitChosenWeapon(weaponSwitcher);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             weaponSwitcher.SwitchToRaycastWeapon();
-            abilities.shooting.Reinit(weaponSwitcher);
+            abilities.shooting.InitChosenWeapon(weaponSwitcher);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             weaponSwitcher.SwitchToBazooke();
-            abilities.shooting.Reinit(weaponSwitcher);
+            abilities.shooting.InitChosenWeapon(weaponSwitcher);
         }
         if (Input.GetKeyDown(KeyCode.Space))
             abilities.jump.Execute();
 
         if (Input.GetMouseButton(0))
         {
-            abilities.shooting.Execute();
-            animManager.Attack();
+            if (!(Input.GetKey(KeyCode.W)
+                   || Input.GetKey(KeyCode.A)
+                   || Input.GetKey(KeyCode.S)
+                   || Input.GetKey(KeyCode.D)))
+                abilities.shooting.Execute();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-            if (!PauseMenuManagment.instance.pause.activeInHierarchy)
-                pauseMenu.Execute();
+        if (Input.GetKeyDown(KeyCode.Escape))
+            pauseMenu.Execute();
     }
 }
