@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player
+public class Atributes : MonoBehaviour
 {
-    public class Atributes : MonoBehaviour
-    {
-        public int speed;
-    }
+    public int speed;
 }

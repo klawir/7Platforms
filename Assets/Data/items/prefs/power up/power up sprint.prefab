@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49a08ebcd3d9404c919acb635f7cfc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTag: player
   root: {fileID: 4893348685499365317}
   sprint: 1
 --- !u!1 &4893348685499365317

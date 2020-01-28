@@ -2,20 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player
+public class Bazooke : WeaponWithAmmo
 {
-    namespace Weapon
+    public override void Shoot()
     {
-        namespace TypeOf
-        {
-            public class Bazooke : WeaponWithAmmo
-            {
-                public override void Shoot()
-                {
-                    base.Shoot();
-                    tempObj.GetComponent<Rocket>().Momentum(rifleBarrel);
-                }
-            }
-        }
+        base.Shoot();
+        tempObj.GetComponent<Rocket>().Momentum(rifleBarrel);
     }
 }

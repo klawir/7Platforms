@@ -3,18 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemToLoot : DetectorController
+public class ItemToLoot : ItemToInterractDetector
 {
     public GameObject root;
     public Reward reward;
-    public Combat player;
+    public Score player;
     public Congratulations Congratulations;
-    public Items.ToTake.GUI gui;
 
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        player = other.GetComponent<Combat>();
+        player = other.transform.parent.GetComponentInChildren<Score>();
     }
     protected override void OnTriggerExit(Collider other)
     {
@@ -24,16 +23,20 @@ public class ItemToLoot : DetectorController
     {
         if (playerInZone)
         {
-            gui.EnableInfo();
-            gui.RenderDefault();
+            EnableInterractKeyInfo();
+            BasicGUIText();
             if (Input.GetKeyDown(KeyCode.E))
                 Destroy(root);
         }
     }
+    public override void BasicGUIText()
+    {
+        interractKeyInfo.text = GUITextInterract;
+    }
     void OnDestroy()
     {
-        gui.DisableInfo();
-        player.score.Add(reward);
+        DisableInterractKeyInfo();
+        player.Add(reward);
         Congratulations.enabled = true;
     }
 }

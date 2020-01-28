@@ -50,6 +50,7 @@ MonoBehaviour:
   momentum: {fileID: -702679420608873286}
   speed: 60
   effect: {fileID: 100002, guid: 0b24f31f464fa614a84acdeac974ed6b, type: 3}
+  enemyTag: enemy
   dmg: 2
 --- !u!54 &-702679420608873286
 Rigidbody:

@@ -9,10 +9,15 @@ using Player;
 public class GameState : MonoBehaviour
 {
     private string path;
-    public Player.GUI gui;
+
     public Score playersScore;
     public Model playerModel;
-    public Abilities playerAtributes;
+    public Name name;
+    public Health health;
+    public Transform playerRoot;
+    public KeyCollection keyCollection;
+
+    public UIAbilityUnlocker uiAbilityUnlocker;
     public ManagerScene scene;
     public KeySpawnManager keySpawnManager;
     public PowerUpSpawnManager powerUpSpawnManager;
@@ -34,9 +39,10 @@ public class GameState : MonoBehaviour
             if (IsSaveExist)
             {
                 Load();
-                gui.UpdateScore(gameDataState.score);
-                playerModel.LoadGameState();
-                keySpawnManager.LoadSpawnState(playerModel.KeyNumber);
+                playersScore.UpdateGUI(gameDataState);
+                name.Update(gameDataState);
+                health.Update(gameDataState);
+                keySpawnManager.LoadSpawnState(keyCollection.KeyNumber);
                 powerUpSpawnManager.Spawn(playerModel);
             }
             else
@@ -85,7 +91,7 @@ public class GameState : MonoBehaviour
         binaryFormatter = new BinaryFormatter();
         stream = new FileStream(path, FileMode.Create);
 
-        gameDataState = new DataToSave(playersScore, playerModel, platformDataToSave, playerWon);
+        gameDataState = new DataToSave(playerRoot, platformDataToSave, playerWon);
         binaryFormatter.Serialize(stream, gameDataState);
         stream.Close();
     }
@@ -113,18 +119,18 @@ public class GameState : MonoBehaviour
             gameDataState = binaryFormatter.Deserialize(stream) as DataToSave;
 
             if (!gameDataState.unlockedSprint)
-                playerAtributes.UnlockSprint();
+                uiAbilityUnlocker.UnlockSprint();
 
             if (!gameDataState.unlockedDoubleJump)
-                playerAtributes.UnlockDoubleJump();
+                uiAbilityUnlocker.UnlockDoubleJump();
 
             playersScore.Value = gameDataState.score;
             playerModel.name = gameDataState.name;
             TimeManager.instance. LoadedTime = gameDataState.gameTime;
-            playerModel.GetComponent<Health>().current= gameDataState.health;
+            health.current= gameDataState.health;
 
             for (int a = 0; a < gameDataState.keyNumber; a++)
-                playerModel.TakeKey();
+                keyCollection.TakeKey();
             
             LoadPlatformsState();
             stream.Close();

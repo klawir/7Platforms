@@ -1,16 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Congratulations : MonoBehaviour
+public class Congratulations : GameOver
 {
-    public Text text;
-    private Delay delay;
-    public float duration;
-    public GameState gameState;
-    public ManagerScene scene;
-    public CursorManager cursorManager;
 
     private void OnEnable()
     {
@@ -23,7 +16,7 @@ public class Congratulations : MonoBehaviour
     {
         if (delay.IsOver)
         {
-            scene.LoadScoreBoard();
+            managerScene.LoadScoreBoard();
             cursorManager.Enable();
         }
     }

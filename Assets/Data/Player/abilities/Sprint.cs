@@ -7,16 +7,19 @@ public class Sprint : Ability, Command
 {
     private Atributes atributes;
     private int accelerate;
+    private Model model;
 
-    public Sprint(Atributes atributes)
+    public Sprint(Transform rootPlayer)
     {
-        this.atributes = atributes;
+        atributes = rootPlayer.GetComponentInChildren<Atributes>();
         accelerate = Calculate;
+        model = rootPlayer.GetComponentInChildren<Model>();
     }
     public override void Execute()
     {
-        if(!blockade)
-            Accelerate();
+        if(model.IsGrounded)
+            if(!blockade)
+                Accelerate();
     }
     private void Accelerate()
     {

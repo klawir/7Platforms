@@ -1,4 +1,4 @@
-﻿using Enemy;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +17,10 @@ public class Projectile : Bullet
     }
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("enemy"))
+        if (other.CompareTag(enemyTag))
         {
             target = other;
-            other.GetComponent<BaseCombat>().TakeDmg(dmg);
+            target.gameObject.GetComponent<Health>().Remove(dmg);
             Destroy(gameObject);
         }
     }

@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e0ce8dce3766e48a49b6d6f26165e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTag: player
+  txtToDisplay: {fileID: 0}
   root: {fileID: 7107633947084017298}
   reward: {fileID: 1539847053987098266}
   player: {fileID: 0}

@@ -15,10 +15,6 @@ public abstract class Ability : MonoBehaviour
         blockade = true;
     }
 
-    public bool IsBlockade
-    {
-        get { return blockade; }
-    }
     public bool Islocked
     {
         get { return blockade; }

@@ -1,40 +1,41 @@
-﻿using Player;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChestController : DetectorController
+public class ChestController : ItemToInterractDetector
 {
-    private Model player;
-    public Items.ToUse.GUI gui;
-    public List <Collider> col;
+    private KeyCollection player;
     public GameObject loot;
     public Transform up;
-
-    enum DoorState
+    public Text GUIrequirementsToOpen;
+    private State state;
+    public string GUITextRequirementsToOpen;
+    public string GUITextStateToOpen;
+    
+    enum State
     {
         Closed,
         Opened
     }
 
-    DoorState doorState = new DoorState();
-    
     void Start()
     {
         SetStateToClosed();
+        state = new State();
     }
+    
     void Update()
     {
         if (playerInZone)
         {
-            if (Input.GetKeyDown(KeyCode.E) && player.HasKeys)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if (IsClosed)
+                if(player.HasKeys)
                 {
                     SetStateToOpened();
                     Open();
                     loot.SetActive(true);
-                    gui.DisableInfoState();
+                    DisableGUIrequirementsToOpen();
                 }
             }
         }
@@ -44,50 +45,71 @@ public class ChestController : DetectorController
     {
         base.OnTriggerEnter(other);
        
-        if (other.CompareTag("player"))
+        if (other.CompareTag(playerTag))
         {
-            player = other.GetComponent<Model>();
+            player = other.transform.parent.GetComponentInChildren<KeyCollection>();
             if (IsOpened)
-                gui.RenderDefault();
+                BasicGUIText();
             else if (IsClosed)
             {
-                gui.RenderOpen();
+                RenderOpen();
                 if (!player.HasKeys)
                 {
-                    gui.EnableInfoState();
-                    gui.RenderState();
+                    EnableGUIrequirementsToOpen();
+                    RenderState();
                 }
             }
-            gui.EnableInfo();
+            EnableInterractKeyInfo();
         }
     }
     protected override void OnTriggerExit(Collider other)
     {
         base.OnTriggerExit(other);
-        gui.DisableInfoState();
-        gui.DisableInfo();
+        DisableGUIrequirementsToOpen();
+        DisableInterractKeyInfo();
         if (IsOpened)
         {
             Close();
             loot.SetActive(false);
         }
     }
+    
+    public override void BasicGUIText()
+    {
+        interractKeyInfo.text = GUITextInterract;
+    }
+    public void RenderOpen()
+    {
+        interractKeyInfo.text = GUITextStateToOpen;
+    }
+    public void RenderState()
+    {
+        GUIrequirementsToOpen.text = GUITextRequirementsToOpen;
+    }
+    public void EnableGUIrequirementsToOpen()
+    {
+        GUIrequirementsToOpen.gameObject.SetActive(true);
+    }
+    public void DisableGUIrequirementsToOpen()
+    {
+        GUIrequirementsToOpen.gameObject.SetActive(false);
+    }
 
     private void SetStateToOpened()
     {
-        doorState = DoorState.Opened;
+        state = State.Opened;
     }
     private void SetStateToClosed()
     {
-        doorState = DoorState.Closed;
+        state = State.Closed;
     }
     private bool IsOpened
     {
-        get { return doorState == DoorState.Opened; }
+        get { return state == State.Opened; }
     }
     private bool IsClosed
     {
-        get { return doorState == DoorState.Closed; }
+        get { return state == State.Closed; }
     }
     private void Open()
     {

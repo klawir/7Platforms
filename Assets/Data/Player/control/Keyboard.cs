@@ -1,17 +1,12 @@
-﻿using Menu;
-using Player;
-using Player.Weapon;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Keyboard : MonoBehaviour
 {
-    public GameObject playerTransf;
-    public Model playersModel;
     public WeaponManager weaponSwitcher;
     public Abilities abilities;
-    public AnimManager animManager;
 
     private Command pauseMenu;
 
@@ -21,43 +16,29 @@ public class Keyboard : MonoBehaviour
     }
     void Update()
     {
-        if (playersModel.IsGrounded)
-        {
-            if (Input.GetKey(KeyCode.W)
+        if (Input.GetKey(KeyCode.W)
                 || Input.GetKey(KeyCode.A)
                 || Input.GetKey(KeyCode.S)
                 || Input.GetKey(KeyCode.D))
-            {
-                animManager.Go();
-                abilities.movement.Execute();
-                if (Input.GetKeyDown(KeyCode.LeftShift))
-                    abilities.sprint.Execute();
-                if (Input.GetKeyUp(KeyCode.LeftShift))
-                    abilities.backToNormalSpeed.Execute();
-            }
+        {
+            abilities.movement.Execute();
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                abilities.sprint.Execute();
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+                abilities.backToNormalSpeed.Execute();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1)
-            || Input.GetKeyDown(KeyCode.Alpha2)
-            || Input.GetKeyDown(KeyCode.Alpha3))
-            weaponSwitcher.DeleteCurrentChosenIfExist();
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            weaponSwitcher.SwitchToFastShootingWeapon();
-            abilities.shooting.InitChosenWeapon(weaponSwitcher);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            weaponSwitcher.SwitchToRaycastWeapon();
-            abilities.shooting.InitChosenWeapon(weaponSwitcher);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            weaponSwitcher.SwitchToBazooke();
-            abilities.shooting.InitChosenWeapon(weaponSwitcher);
-        }
         if (Input.GetKeyDown(KeyCode.Space))
             abilities.jump.Execute();
+        if (Input.GetKeyDown(KeyCode.Escape))
+            pauseMenu.Execute();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            weaponSwitcher.SwitchToFastShootingWeapon();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            weaponSwitcher.SwitchToRaycastWeapon();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            weaponSwitcher.SwitchToBazooke();
 
         if (Input.GetMouseButton(0))
         {
@@ -67,8 +48,5 @@ public class Keyboard : MonoBehaviour
                    || Input.GetKey(KeyCode.D)))
                 abilities.shooting.Execute();
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            pauseMenu.Execute();
     }
 }

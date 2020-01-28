@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5703de7049db7774e900e7f15878c095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numer: {fileID: 1427697772}
+  number: {fileID: 1427697772}
   name: {fileID: 4499593134969271520}
   points: {fileID: 1103330356940116413}
   time: {fileID: 5855308382248332556}

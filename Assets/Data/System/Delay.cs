@@ -19,8 +19,4 @@ public class Delay : MonoBehaviour
     {
         nextActionTime = Time.time+value;
     }
-    public void Test()
-    {
-        Debug.Log(Time.time+" "+ nextActionTime);
-    }
 }

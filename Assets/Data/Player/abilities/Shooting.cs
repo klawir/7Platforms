@@ -1,5 +1,5 @@
-﻿using Player.Weapon;
-using Player.Weapon.TypeOf;
+﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,11 +16,11 @@ public class Shooting :Ability, Command
 
     public Shooting(WeaponManager weaponSwitcher)
     {
-        weaponSwitcher.SwitchToFastShootingWeapon();
         delay = new Delay();
         delay.Init(speed);
         weapon = weaponSwitcher.CurrentChosenWeapon;
         animManager = weaponSwitcher.animManager;
+        
     }
     public void InitChosenWeapon(WeaponManager weaponSwitcher)
     {
@@ -28,7 +28,7 @@ public class Shooting :Ability, Command
         speed = weaponSwitcher.CurrentChosenWeapon.speedAttack;
         weapon = weaponSwitcher.CurrentChosenWeapon;
         weaponsSFX = weapon.audio;
-        animManager = weaponSwitcher.animManager;
+        animManager = weaponSwitcher.animManager; 
     }
     public override void Execute()
     {

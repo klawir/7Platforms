@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e125a515eff51428e70926c790725b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTag: player
   root: {fileID: 6576793210236989963}
   reward: {fileID: 8995494740113297860}
-  player: {fileID: 0}
 --- !u!54 &2981765602325368849
 Rigidbody:
   m_ObjectHideFlags: 0

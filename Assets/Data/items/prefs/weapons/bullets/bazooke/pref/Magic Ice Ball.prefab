@@ -48,6 +48,7 @@ MonoBehaviour:
   momentum: {fileID: 5821558292268435231}
   speed: 0
   effect: {fileID: 100006, guid: e4704660d196fac40802911e12ac76f1, type: 3}
+  enemyTag: enemy
   dmg: 15
 --- !u!135 &5232014725156528087
 SphereCollider:
@@ -18738,6 +18739,7 @@ MonoBehaviour:
   momentum: {fileID: 5637222723432245761}
   speed: 30
   effect: {fileID: 0}
+  enemyTag: enemy
   explosion: {fileID: 936215470040664701}
 --- !u!54 &5637222723432245761
 Rigidbody:

@@ -1,5 +1,4 @@
-﻿using Enemy;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,8 +11,8 @@ public class ZombieSpawnManager : MonoBehaviour
     public void Spawn()
     {
         GameObject zombie = Instantiate(ZombiePref, zombieSpawnPoint) as GameObject;
-        zombie.transform.Find("model").GetComponent<Combat>().platformTerrain = platform;
-        zombie.transform.Find("navigation").GetComponent<Navigation>().platform = platform;
+        zombie.GetComponentInChildren<Combat>().platformTerrain = platform;
+        zombie.GetComponentInChildren<Navigation>().platform = platform;
     }
     public void Spawn(int numberOf, float hp)
     {
@@ -21,10 +20,10 @@ public class ZombieSpawnManager : MonoBehaviour
         for (int a = 0; a < numberOf; a++)
         {
             zombie = Instantiate(ZombiePref, zombieSpawnPoint) as GameObject;
-            Health health = zombie.transform.Find("model").GetComponent<Health>();
+            Health health = zombie.GetComponentInChildren<Health>();
             health.current = hp;
             health.GetComponent<Combat>().platformTerrain = platform;
-            Navigation navigation = zombie.transform.Find("navigation").GetComponent<Navigation>();
+            Navigation navigation = zombie.GetComponentInChildren<Navigation>();
             navigation.platform = platform;
         }
     }

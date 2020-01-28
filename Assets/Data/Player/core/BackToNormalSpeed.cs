@@ -7,17 +7,20 @@ public class BackToNormalSpeed :Ability, Command
 {
     private Atributes atributes;
     private int speed;
+    private Model model;
 
-    public BackToNormalSpeed(Atributes atributes)
+    public BackToNormalSpeed(Transform root)
     {
-        this.atributes = atributes;
+        atributes = root.GetComponentInChildren<Atributes>();
         speed = atributes.speed;
+        model = root.GetComponentInChildren<Model>();
     }
     public override void Execute()
     {
-        Speed();
+        if(model.IsGrounded)
+            Restore();
     }
-    private void Speed()
+    private void Restore()
     {
         atributes.speed = speed;
     }

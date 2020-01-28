@@ -8,6 +8,7 @@ public abstract class Bullet : MonoBehaviour
     public float speed;
     public GameObject effect;
     protected Collider target;
+    public string enemyTag;
 
     public virtual void Momentum(Transform rifleBarrel)
     {
@@ -15,9 +16,12 @@ public abstract class Bullet : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (transform.position.y < 0)
+        if (IsUnderPlatform)
             Destroy(gameObject);
     }
-
+    private bool IsUnderPlatform
+    {
+        get { return transform.position.y < 0; }
+    }
     protected abstract void OnTriggerEnter(Collider other);
 }

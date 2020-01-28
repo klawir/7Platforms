@@ -5,24 +5,25 @@ using UnityEngine;
 public class PlatformTerrain : MonoBehaviour
 {
     private bool playerDetected;
-    private BaseCombat detectedPlayer;
+    private Health detectedPlayer;
     public ZombieSpawnManager spawnManager;
     public Transform zombieSpawnPoint;
     public int zombieLimit;
+    public string playerTag;
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if (collision.gameObject.CompareTag("player"))
+        if (col.gameObject.CompareTag(playerTag))
         {
             playerDetected = true;
-            detectedPlayer = collision.gameObject.GetComponent<BaseCombat>();
+            detectedPlayer = col.transform.parent.GetComponentInChildren<Health>();
             if (!IsZombieLimit)
                 spawnManager.Spawn();
         }
     }
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collider col)
     {
-        if (collision.gameObject.CompareTag("player"))
+        if (col.gameObject.CompareTag(playerTag))
         {
             playerDetected = false;
             detectedPlayer = null;
@@ -36,7 +37,7 @@ public class PlatformTerrain : MonoBehaviour
     {
         get { return playerDetected; }
     }
-    public BaseCombat DetectedPlayer
+    public Health DetectedPlayer
     {
         get { return detectedPlayer; }
     }

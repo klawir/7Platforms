@@ -11,9 +11,7 @@ public class PlatformDataToSave
 
     public PlatformDataToSave(int number, int numberOfZombies, ZombieDataToSave[] zombieDataToSave)
     {
-        //string paltformName = platform.name;
-        //paltformName = Regex.Match(platform.name, @"\d+").Value;
-        this.number = number; //int.Parse(paltformName);
+        this.number = number;
         this.zombieDataToSave = new ZombieDataToSave[numberOfZombies];
         this.zombieDataToSave = zombieDataToSave;
     }

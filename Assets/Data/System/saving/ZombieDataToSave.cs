@@ -9,7 +9,7 @@ public class ZombieDataToSave
 
     public ZombieDataToSave(GameObject model)
     {
-        Health health= model.transform.Find("model").GetComponent<Health>();
+        Health health= model.GetComponentInChildren<Health>();
         this.hp = health.current;
     }
 }

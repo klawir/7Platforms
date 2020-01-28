@@ -16,15 +16,15 @@ public class DataToSave
     public PlatformDataToSave[] platformDataToSaves;
     public bool gameSuccessed;
 
-    public DataToSave(Score score, Model model, PlatformDataToSave[] platformDataToSaves, bool gameSuccessed)
+    public DataToSave(Transform playerRoot, PlatformDataToSave[] platformDataToSaves, bool gameSuccessed)
     {
-        this.score = score.Value;
-        name = model.name;
+        this.score = playerRoot.GetComponentInChildren<Score>().Value;
+        name = playerRoot.GetComponentInChildren<Name>()._name;
         gameTime = TimeManager.instance.Gametime;
-        health = model.GetComponent<Health>().current;
-        unlockedDoubleJump = model.abilities.jump.IsBlockade;
-        unlockedSprint = model.abilities.sprint.IsBlockade;
-        keyNumber = model.KeyNumber;
+        health = playerRoot.GetComponentInChildren<Health>().current;
+        unlockedDoubleJump = playerRoot.GetComponentInChildren<Abilities>().jump.Islocked;
+        unlockedSprint = playerRoot.GetComponentInChildren<Abilities>().sprint.Islocked;
+        keyNumber = playerRoot.GetComponentInChildren<KeyCollection>().KeyNumber;
         this.platformDataToSaves = platformDataToSaves;
         this.gameSuccessed = gameSuccessed;
     }

@@ -1,23 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Player
+public class FastShootingWeapon : WeaponWithAmmo
 {
-    namespace Weapon
+    protected override void Start()
     {
-        namespace TypeOf
-        {
-            public class FastShootingWeapon : WeaponWithAmmo
-            {
-                protected override void Start()
-                {
-                    base.Start();
-                }
-                public override void Shoot()
-                {
-                    base.Shoot();
-                    tempObj.GetComponent<Projectile>().Momentum(rifleBarrel);
-                }
-            }
-        }
+        base.Start();
+    }
+    public override void Shoot()
+    {
+        base.Shoot();
+        tempObj.GetComponent<Projectile>().Momentum(rifleBarrel);
     }
 }

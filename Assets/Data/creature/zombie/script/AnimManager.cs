@@ -12,20 +12,31 @@ public class AnimManager : MonoBehaviour
     public AnimationClip die;
     public List<float> weaponsSpeedAttack;
 
+    public float resetOfAttackForHitMommentInPercent;
     public float hitMommentInPercent;
+    public float theEndOfDeadDetectInPercent;
+
     enum weaponsList { fastShootingWeapon, raycastWeapon, bazooke }
 
     public bool IsEndOfDeadAnim
     {
-        get { return animation[die.name].time > animation[die.name].length - (animation[die.name].length / 100) * 5; }
+        get { return animation[die.name].time > animation[die.name].length - OnePercentOfDie * theEndOfDeadDetectInPercent; }
     }
     public bool IsHitMomment
     {
-        get { return animation[attack.name].time > (animation[attack.name].length / 100) * hitMommentInPercent; }
+        get { return animation[attack.name].time > OnePercentOfAttack * hitMommentInPercent; }
     }
     public bool IsBeginningOfAttack
     {
-        get { return animation[attack.name].time > 0 && animation[attack.name].time <= (animation[attack.name].length / 100) * 10; }
+        get { return animation[attack.name].time > 0 && animation[attack.name].time <= OnePercentOfAttack * resetOfAttackForHitMommentInPercent; }
+    }
+    private float OnePercentOfAttack
+    {
+        get { return (animation[attack.name].length / 100); }
+    }
+    private float OnePercentOfDie
+    {
+        get { return (animation[die.name].length / 100); }
     }
     public bool IsAttacking
     {

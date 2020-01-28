@@ -473,11 +473,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc1efbb35d8dec478c0d3ae7f2da92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gui: {fileID: 0}
   playersScore: {fileID: 0}
   playerModel: {fileID: 0}
-  playerAtributes: {fileID: 0}
-  scene: {fileID: 0}
+  name: {fileID: 0}
+  health: {fileID: 0}
+  playerRoot: {fileID: 0}
+  keyCollection: {fileID: 0}
+  uiAbilityUnlocker: {fileID: 0}
+  scene: {fileID: 931506288}
   keySpawnManager: {fileID: 0}
   powerUpSpawnManager: {fileID: 0}
   map: {fileID: 0}

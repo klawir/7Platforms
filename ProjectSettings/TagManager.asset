@@ -8,11 +8,11 @@ TagManager:
   - player
   - itemToTake
   - enemy
-  - New tag
   - scoreTime
   - scoreName
   - scorePoints
   - scoreNr
+  - itemToUse
   layers:
   - Default
   - TransparentFX

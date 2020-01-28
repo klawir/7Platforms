@@ -7,14 +7,13 @@ namespace OnTheGround
 {
     public class PowerUpControler : ItemToTakeControler
     {
-        private Abilities player;
+        private UIAbilityUnlocker player;
 
         public bool sprint;
 
         protected virtual void Start()
         {
-            player = GameObject.FindObjectOfType<Player.Abilities>();
-
+            player = GameObject.FindObjectOfType<UIAbilityUnlocker>();
         }
         protected override void OnTriggerEnter(Collider other)
         {

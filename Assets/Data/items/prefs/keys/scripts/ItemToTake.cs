@@ -8,14 +8,16 @@ namespace OnTheGround
     public class ItemToTake : ItemToTakeControler
     {
         public Reward reward;
-        public Combat player;
+        private KeyCollection playerKeys;
+        private Score playerScore;
 
         protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-            if (other.gameObject.CompareTag("player"))
+            if (other.gameObject.CompareTag(playerTag))
             {
-                player = other.GetComponent<Combat>();
+                playerKeys = other.transform.parent.GetComponentInChildren<KeyCollection>();
+                playerScore= other.transform.parent.GetComponentInChildren<Score>();
                 Destroy(root);
             }
         }
@@ -30,9 +32,9 @@ namespace OnTheGround
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            player.score.Add(reward);
+            playerScore.Add(reward);
             if (root.name == "key(Clone)")
-                player.GetComponent<Model>().TakeKey();
+                playerKeys.TakeKey();
         }
     }
 }

@@ -6,13 +6,27 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     public float current;
-    public Player.GUI gui;
+    public Text gui;
 
     private void Awake()
     {
-        gui.UpdateHealth(this);
+        UpdateGUI();
     }
-
+    public void UpdateGUI()
+    {
+        gui.text = current.ToString();
+    }
+    public void Update(DataToSave value)
+    {
+        current = value.health;
+        UpdateGUI();
+    }
+    public void Remove(int value)
+    {
+        current -= value;
+        if(gui!=null)
+            UpdateGUI();
+    }
     public bool IsDead
     {
         get { return current <= 0; }
