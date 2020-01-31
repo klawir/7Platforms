@@ -17,6 +17,6 @@ public class Explosion : BulletDecorator
     }
     private void OnDestroy()
     {
-        Instantiate(effect, target.bounds.center, Quaternion.identity);
+        Instantiate(effect, target.transform);
     }
 }

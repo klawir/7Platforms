@@ -14,17 +14,20 @@ public class Combat : MonoBehaviour
     public AudioSource attack;
     public Collider collider;
     public Transform model;
+    public GameObject navigation;
 
     private Health detectedPlayer;
     private bool wasHit;
 
     void Update()
     {
-        if (!IsDead)
+        if (IsDead)
+            Die();
+        else
         {
             if (platformTerrain.IsPlayerDetected)
             {
-                if (detectedPlayer == null)
+                if (PlayerHasBeenSpotted)
                     TakePlayer();
                 if (IsPlayerInRange)
                 {
@@ -41,10 +44,12 @@ public class Combat : MonoBehaviour
                 }
             }
         }
-        else
-            Die();
         if (animManager.IsEndOfDeadAnim)
             Destroy(transform.parent.gameObject);
+    }
+    private bool PlayerHasBeenSpotted
+    {
+        get { return detectedPlayer == null; }
     }
     private void TakePlayer()
     {
@@ -65,6 +70,7 @@ public class Combat : MonoBehaviour
     private void Die()
     {
         Destroy(collider);
+        Destroy(navigation);
         animManager.Die();
     }
     private void OnDestroy()

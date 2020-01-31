@@ -1724,6 +1724,7 @@ MonoBehaviour:
   attack: {fileID: 7658905745247257552}
   collider: {fileID: 8126255654635812489}
   model: {fileID: 3232375828137836702}
+  navigation: {fileID: 3232375828027456971}
 --- !u!114 &9046559925429001191
 MonoBehaviour:
   m_ObjectHideFlags: 0

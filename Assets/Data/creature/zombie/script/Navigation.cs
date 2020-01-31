@@ -12,45 +12,46 @@ public class Navigation : MonoBehaviour
     public Combat combat;
     public Transform model;
 
-    private Vector3 pos;
+    private Vector3 calculatedTargetPosition;
     public float positionLerping;
 
     private void Update()
     {
-        if (!combat.IsDead)
+        if (platform.IsPlayerDetected)
         {
-            if (platform.IsPlayerDetected)
+            if (combat.IsPlayerInRange)
             {
-                if (combat.IsPlayerInRange)
-                {
-                    if (agent.enabled)
-                    {
-                        avoidance.Enable();
-                        Disable();
-                    }
-                }
-                else
-                {
-                    if (agent.enabled)
-                        Go();
-                    else
-                    {
-                        if (!avoidance.IsObstacleEnable)
-                            Enable();
-                        else
-                            avoidance.Disable();
-                    }
-                }
-            }
-
-            else
-            {
-                animManager.Idle();
                 if (agent.enabled)
                 {
                     avoidance.Enable();
                     Disable();
                 }
+            }
+            else
+            {
+                if (agent.enabled)
+                {
+                    if (calculatedTargetPosition != platform.DetectedPlayer.transform.position)
+                        InitPlayersPos();
+                    Go();
+                }
+                else
+                {
+                    if (!avoidance.IsObstacleEnable)
+                        Enable();
+                    else
+                        avoidance.Disable();
+                }
+            }
+        }
+
+        else
+        {
+            animManager.Idle();
+            if (agent.enabled)
+            {
+                avoidance.Enable();
+                Disable();
             }
         }
     }
@@ -65,10 +66,9 @@ public class Navigation : MonoBehaviour
 
     private void Go()
     {
-        InitPlayersPos();
         animManager.Go();
         Moving(agent);
-        avoidance.GoToPosition(pos);
+        avoidance.GoToPosition(transform.position);
     }
     private void Moving(NavMeshAgent agent)
     {
@@ -78,5 +78,6 @@ public class Navigation : MonoBehaviour
     private void InitPlayersPos()
     {
         agent.destination = platform.DetectedPlayer.transform.position;
+        calculatedTargetPosition = agent.destination;
     }
 }

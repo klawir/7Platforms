@@ -13,13 +13,6 @@ public class Model : MonoBehaviour
 
     private void Update()
     {
-        if (!(Input.GetKey(KeyCode.W) ||
-            Input.GetKey(KeyCode.A) ||
-            Input.GetKey(KeyCode.S) ||
-            Input.GetKey(KeyCode.D)) &&
-            !(Input.GetMouseButton(0)))
-            animManager.Idle();
-
         if (IsInTheAir)
         {
             root.Translate(Move.movementVector);
