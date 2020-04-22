@@ -418,7 +418,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.761e-42, y: 1.05e-43, z: 4e-45, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 13, z: 12, w: -14}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3221,11 +3221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cd60b33014f9a469c33321b2b13c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 320903669}
-  distance: 7
-  height: 8
-  heightDamping: 3
-  rotationDamping: 3
+  target: {fileID: 5771142436702859702}
+  distance: 8
+  heigh: 7
 --- !u!114 &586533465 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3144028716719628316, guid: 5e610a4d1ebb0b54689e3e8694dd19fe,
@@ -7819,7 +7817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e0d6c6b61051a4f89ebae2de25e2b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSwitcher: {fileID: 866341778}
   abilities: {fileID: 424497211}
 --- !u!1 &5771142437792976422
 GameObject:

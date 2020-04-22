@@ -17,39 +17,30 @@ public class Navigation : MonoBehaviour
 
     private void Update()
     {
-        if (platform.IsPlayerDetected)
-        {
-            if (combat.IsPlayerInRange)
-            {
-                if (agent.enabled)
-                {
+        if (platform.IsPlayerDetected) {
+            if (combat.IsPlayerInRange) {
+                if (agent.enabled) {
                     avoidance.Enable();
                     Disable();
                 }
-            }
-            else
-            {
-                if (agent.enabled)
-                {
-                    if (calculatedTargetPosition != platform.DetectedPlayer.transform.position)
+            } else {
+                if (agent.enabled) {
+                    if (calculatedTargetPosition != platform.DetectedPlayer.transform.position) {
                         InitPlayersPos();
+                    } 
                     Go();
-                }
-                else
-                {
-                    if (!avoidance.IsObstacleEnable)
+
+                } else {
+                    if (!avoidance.IsObstacleEnable) {
                         Enable();
-                    else
+                    } else {
                         avoidance.Disable();
+                    }
                 }
             }
-        }
-
-        else
-        {
+        } else {
             animManager.Idle();
-            if (agent.enabled)
-            {
+            if (agent.enabled) {
                 avoidance.Enable();
                 Disable();
             }
